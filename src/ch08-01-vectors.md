@@ -500,4 +500,4 @@ Let’s move on to the next collection type: `String`!
 [data-types]: ch03-02-data-types.html#データ型
 [nomicon]: https://doc.rust-lang.org/nomicon/vec/vec.html
 [vec-api]: https://doc.rust-lang.org/std/vec/struct.Vec.html
-[deref]: ch15-02-deref.html#参照外し演算子で値までポインタを追いかける
+[deref]: ch15-02-deref.html#値までポインタを追いかける
