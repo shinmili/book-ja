@@ -116,7 +116,7 @@
 - [Error Handling](ch09-00-error-handling.md)
     - [Unrecoverable Errors with `panic!`](ch09-01-unrecoverable-errors-with-panic.md)
     - [Recoverable Errors with `Result`](ch09-02-recoverable-errors-with-result.md)
-    - [To `panic!` or Not To `panic!`](ch09-03-to-panic-or-not-to-panic.md)
+    - [To `panic!` or Not to `panic!`](ch09-03-to-panic-or-not-to-panic.md)
 -->
 - [エラー処理](ch09-00-error-handling.md)
     - [`panic!`で回復不能なエラー](ch09-01-unrecoverable-errors-with-panic.md)
