@@ -10,5 +10,5 @@ fn main() {
 fn calculate_length(s: &String) -> usize { // sはStringへの参照
     s.len()
 } // ここで、sはスコープ外になる。けど、参照しているものの所有権を持っているわけではないので
-  // 何も起こらない
+  // ドロップはされない。
 // ANCHOR_END: here
