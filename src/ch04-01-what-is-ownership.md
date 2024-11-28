@@ -961,6 +961,7 @@ The ownership of a variable follows the same pattern every time: assigning a
 value to another variable moves it. When a variable that includes data on the
 heap goes out of scope, the value will be cleaned up by `drop` unless ownership
 of the data has been moved to another variable.
+-->
 
 変数の所有権は、毎回同じパターンを辿っています: 別の変数に値を代入すると、ムーブされます。
 ヒープにデータを含む変数がスコープを抜けると、データの所有権が別の変数にムーブされていない限り、
