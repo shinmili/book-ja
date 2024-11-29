@@ -54,7 +54,7 @@ Next, place the code that was in the curly brackets into a new file named
 in this file because it came across the module declaration in the crate root
 with the name `front_of_house`.
 -->
-次に リスト7-22に示すように、*src/front_of_house.rs* という名前の新しいファイルに、波かっこの中にあったコードを配置してください。
+次に、リスト7-22に示すように、*src/front_of_house.rs* という名前の新しいファイルに、波かっこの中にあったコードを配置してください。
 コンパイラは、クレートルートで`front_of_house`という名前のモジュール宣言を見つけたときは、このファイルを探せばいいということを知っています。
 
 <!--
