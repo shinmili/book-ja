@@ -156,16 +156,6 @@ Rustでは、すべての要素（関数、メソッド、構造体、enum、モ
 関数や構造体などの要素を非公開にしたければ、モジュールの中に置いてください。
 
 <!--
-Modules aren’t useful only for organizing your code. They also define Rust’s
-*privacy boundary*: the line that encapsulates the implementation details
-external code isn’t allowed to know about, call, or rely on. So, if you want to
-make an item like a function or struct private, you put it in a module.
--->
-モジュールはコードの整理に役立つだけではありません。
-モジュールはRustの *プライバシー境界* も定義します。これは、外部のコードが知ったり、呼び出したり、依存したりしてはいけない実装の詳細をカプセル化する線引きです。
-なので、関数や構造体といった要素を非公開にしたければ、モジュールに入れればよいのです。
-
-<!--
 Items in a parent module can’t use the private items inside child modules, but
 items in child modules can use the items in their ancestor modules. This is
 because child modules wrap and hide their implementation details, but the child
