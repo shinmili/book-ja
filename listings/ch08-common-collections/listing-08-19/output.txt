@@ -1,7 +1,7 @@
 $ cargo run
    Compiling collections v0.1.0 (file:///projects/collections)
 error[E0277]: the type `String` cannot be indexed by `{integer}`
-(エラー: 型`String`は`{Integer}`で添え字アクセスできませんん)
+(エラー: 型`String`は`{Integer}`で添え字アクセスできません)
  --> src/main.rs:3:16
   |
 3 |     let h = s1[0];
