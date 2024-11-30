@@ -371,7 +371,7 @@ map that stores words and counts</span>
 <!--
 This code will print `{"world": 2, "hello": 1, "wonderful": 1}`. You might see
 the same key/value pairs printed in a different order: recall from the
-[“Accessing Values in a Hash Map”][access]<!-- ignore --> section that
+[“Accessing Values in a Hash Map”][access] section that
 iterating over a hash map happens in an arbitrary order.
 -->
 
