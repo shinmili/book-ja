@@ -150,7 +150,7 @@ Listing 8-4 shows both methods of accessing a value in a vector, with indexing
 syntax and the `get` method.
 -->
 
-リスト8-5はベクタの値にアクセスする両方の方法として、添え字記法と`get`メソッドが示されています。
+リスト8-4はベクタの値にアクセスする両方の方法として、添え字記法と`get`メソッドが示されています。
 
 ```rust
 {{#rustdoc_include ../listings/ch08-common-collections/listing-08-04/src/main.rs:here}}
