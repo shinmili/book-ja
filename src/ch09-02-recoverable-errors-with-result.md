@@ -407,7 +407,7 @@ copy and paste relevant text
 thread 'main' panicked at src/main.rs:5:10:
 hello.txt should be included in this project: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ('main'スレッドは、src/main.rs:5:10でパニックしました:
-「hello.txtがこのプロジェクトに含まれているべきです: Os { code: 2, kind: NotFound, message: "そのようなファイルやディレクトリはありません" })
+hello.txtがこのプロジェクトに含まれているべきです: Os { code: 2, kind: NotFound, message: "そのようなファイルやディレクトリはありません" })
 ```
 
 <!--
