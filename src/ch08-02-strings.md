@@ -685,12 +685,6 @@ can crash your program.
 ### 文字列を走査するメソッド群
 
 <!--
-Fortunately, you can access elements in a string in other ways.
--->
-
-幸いなことに、他の方法でも文字列の要素にアクセスすることができます。
-
-<!--
 The best way to operate on pieces of strings is to be explicit about whether
 you want characters or bytes. For individual Unicode scalar values, use the
 `chars` method. Calling `chars` on “Зд” separates out and returns two values
