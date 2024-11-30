@@ -957,16 +957,6 @@ allows the use of the `?` operator on `Result` values</span>
 <span class="caption">リスト9-12: `Result<(), E>`を返すように`main`を変更することで、`Result`値に対する`?`演算子が使用可能になる</span>
 
 <!--
-In functions that don’t return `Result`, when
-you call other functions that return `Result`, you’ll need to use a `match` or
-one of the `Result` methods to handle the `Result` instead of using the `?`
-operator to potentially propagate the error to the calling code.
--->
-
-`Result`を返さない関数では、`Result`を返す別の関数を呼び出した時、
-`?`演算子を使用してエラーを呼び出し元に委譲する可能性を生み出す代わりに、`match`か`Result`のメソッドのどれかを使う必要があるでしょう。
-
-<!--
 The `Box<dyn Error>` type is a *trait object*, which we’ll talk about in the
 [“Using Trait Objects that Allow for Values of Different
 Types”][trait-objects] section in Chapter 17. For now, you can
