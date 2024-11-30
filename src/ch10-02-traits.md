@@ -191,27 +191,6 @@ know, people`.
 このコードは、`1 new tweet: horse_ebooks: of course, as you probably already know, people`と出力します。
 
 <!--
-Note that because we defined the `Summary` trait and the `NewsArticle` and
-`Tweet` types in the same *lib.rs* in Listing 10-13, they’re all in the same
-scope. Let’s say this *lib.rs* is for a crate we’ve called `aggregator` and
-someone else wants to use our crate’s functionality to implement the `Summary`
-trait on a struct defined within their library’s scope. They would need to
-bring the trait into their scope first. They would do so by specifying `use
-aggregator::Summary;`, which then would enable them to implement `Summary` for
-their type. The `Summary` trait would also need to be a public trait for
-another crate to implement it, which it is because we put the `pub` keyword
-before `trait` in Listing 10-12.
--->
-
-リスト10-13で`Summary`トレイトと`NewArticle`、`Tweet`型を同じ*lib.rs*に定義したので、
-全部同じスコープにあることに注目してください。この*lib.rs*を`aggregator`と呼ばれるクレート専用にして、
-誰か他の人が私たちのクレートの機能を活用して自分のライブラリのスコープに定義された構造体に`Summary`トレイトを実装したいとしましょう。
-まず、トレイトをスコープに取り込む必要があるでしょう。`use aggregator::Summary;`と指定してそれを行えば、
-これにより、自分の型に`Summary`を実装することが可能になるでしょう。`Summary`トレイトは、
-他のクレートが実装するためには、公開トレイトである必要があり、ここでは、リスト10-12の`trait`の前に、
-`pub`キーワードを置いたのでそうなっています。
-
-<!--
 Other crates that depend on the `aggregator` crate can also bring the `Summary`
 trait into scope to implement `Summary` on their own types. One restriction to
 note is that we can implement a trait on a type only if at least one of the
