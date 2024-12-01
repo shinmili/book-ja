@@ -154,6 +154,9 @@ we’re passing ownership of the iterator returned from `env::args` to
 `Config::build` directly.
 -->
 
+`env::args`関数は、イテレータを返します！イテレータの値をベクタに集結させ、それからスライスを`Config::build`に渡すのではなく、
+今では`env::args`から返ってくるイテレータの所有権を直接`Config::build`に渡しています。
+
 <!--
 Next, we need to update the definition of `Config::build`. In your I/O
 project’s *src/lib.rs* file, let’s change the signature of `Config::build` to
