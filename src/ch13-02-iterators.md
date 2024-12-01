@@ -260,7 +260,7 @@ ownership of the iterator we call it on.
 ### Methods that Produce Other Iterators
 -->
 
-## 他のイテレータを生成するメソッド
+### 他のイテレータを生成するメソッド
 
 <!--
 *Iterator adaptors* are methods defined on the `Iterator` trait that don’t
