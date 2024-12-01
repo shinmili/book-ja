@@ -36,7 +36,7 @@ Rustが、特にこれらの動作を行うテストを書くために用意し�
 ### The Anatomy of a Test Function
 -->
 
-## テスト関数の構成
+### テスト関数の構成
 
 <!--
 At its simplest, a test in Rust is a function that’s annotated with the `test`
