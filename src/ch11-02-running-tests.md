@@ -189,18 +189,6 @@ see the following output:
 ```
 
 <!--
-Note that the output for the tests and the test results are interleaved; the
-reason is that the tests are running in parallel, as we talked about in the
-previous section. Try using the `--test-threads=1` option and the `--nocapture`
-flag, and see what the output looks like then!
--->
-
-テスト用の出力とテスト結果の出力がまぜこぜになっていることに注意してください;
-その理由は、前節で語ったようにテストが並行に実行されているからです。
-`-test-threads=1`オプションと`--nocapture`フラグを使ってみて、
-その時、出力がどうなるか確かめてください！
-
-<!--
 ### Running a Subset of Tests by Name
 -->
 
