@@ -178,15 +178,6 @@ Lisp版の連結リストです。その名前は、2つの引数から新しい
 `cons`を、値と別のペアからなるペアに対して呼び出すことで、再帰的なペアからなるコンスリストを構築することができます。
 
 <!--
-The cons function concept has made its way into more general functional
-programming jargon: “to cons *x* onto *y*” informally means to construct a new
-container instance by putting the element *x* at the start of this new
-container, followed by the container *y*.
--->
-
-cons関数という概念は、より一般的な関数型プログラミングの俗語にもなっています。"to cons *x* onto *y*"はコンテナ*y*の先頭に要素*x*を置くことで新しいコンテナのインスタンスを生成することを意味します。
-
-<!--
 For example, here’s a pseudocode representation of a cons list containing the
 list 1, 2, 3 with each pair in parentheses:
 -->
