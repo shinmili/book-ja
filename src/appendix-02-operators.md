@@ -107,9 +107,9 @@ overload that operator is listed.
 | `&=`              | `var &= expr`                                    | ビットAND後に代入          | `BitAndAssign` |
 | `&&`              | `expr && expr`                                   | 短絡論理AND                ||
 | `*`               | `expr * expr`                                    | 掛け算                    | `Mul` |
+| `*=`              | `var *= expr`                                    | 掛け算後に代入             | `MulAssign` |
 | `*`               | `*expr`                                          | 参照外し                  | `Deref` |
 | `*`               | `*const type`, `*mut type`                       | 生ポインタ                ||
-| `*=`              | `var *= expr`                                    | 掛け算後に代入             | `MulAssign` |
 | `+`               | `trait + trait`, `'a + trait`                    | 型制限の複合化             ||
 | `+`               | `expr + expr`                                    | 足し算                    | `Add` |
 | `+=`              | `var += expr`                                    | 足し算後に代入             | `AddAssign` |
@@ -146,7 +146,6 @@ overload that operator is listed.
 | `^`               | `expr ^ expr`                                    | ビットXOR                | `BitXor` |
 | `^=`              | `var ^= expr`                                    | ビットXOR後に代入         | `BitXorAssign` |
 | <code>&vert;</code>   | <code>pat &vert; pat</code>                  | パターンOR               ||
-| <code>&vert;</code>   | <code>&vert;…&vert; expr</code>             | クロージャ               ||
 | <code>&vert;</code>   | <code>expr &vert; expr</code>                | ビットOR                 | `BitOr` |
 | <code>&vert;=</code>  | <code>var &vert;= expr</code>                | ビットOR後に代入          | `BitOrAssign`|
 | <code>&vert;&vert;</code> | <code>expr &vert;&vert; expr</code>      | 短絡論理OR                   ||
