@@ -603,7 +603,7 @@ type, we need to use fully qualified syntax. Listing 19-21 demonstrates how to
 use fully qualified syntax.
 -->
 
-何らかの他の型に対する`Animalの実装ではなく`Dog`に対する`Animal`実装を使用したいことを、
+何らかの他の型に対する`Animal`の実装ではなく`Dog`に対する`Animal`実装を使用したいことを、
 コンパイラに明確化して指示するには、フルパス記法を使う必要があります。
 リスト19-21は、フルパス記法を使用する方法をデモしています。
 
