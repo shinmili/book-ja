@@ -383,12 +383,6 @@ Table B-7 shows symbols that create comments.
 | `/**...*/` | 外部ブロックdocコメント |
 
 <!--
-#### Tuples
--->
-
-#### タプル
-
-<!--
 Table B-8 shows symbols that appear in the context of using tuples.
 -->
 
