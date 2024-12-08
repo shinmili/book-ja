@@ -290,19 +290,6 @@ generate code to create a vector containing the specified elements.
 任意の型のあらゆる数の引数を取り、指定した要素を含むベクタを生成するコードを生成できるマクロを定義しました。
 
 <!--
-There are some strange edge cases with `macro_rules!`. In the future, Rust will
-have a second kind of declarative macro that will work in a similar fashion but
-fix some of these edge cases. After that update, `macro_rules!` will be
-effectively deprecated. With this in mind, as well as the fact that most Rust
-programmers will *use* macros more than *write* macros, we won’t discuss
-`macro_rules!` any further.
--->
-`macro_rules!`には、いくつかの奇妙なコーナーケースがあります。
-将来、Rustには別種の宣言的マクロが登場する予定です。これは、同じように働くけれども、それらのコーナーケースのうちいくらかを修正します。
-そのアップデート以降、`macro_rules!`は事実上非推奨 (deprecated) となる予定です。
-この事実と、ほとんどのRustプログラマーはマクロを*書く*よりも*使う*ことが多いということを考えて、`macro_rules!`についてはこれ以上語らないことにします。
-
-<!--
 To learn more about how to write macros, consult the online documentation or
 other resources, such as [“The Little Book of Rust Macros”][tlborm] started by
 Daniel Keep and continued by Lukas Wirth.
