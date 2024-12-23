@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -200,8 +199,7 @@ scope.
 
         println!(&quot;r: {}&quot;, r);
     }
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 <span class="caption">Listing 10-17: An attempt to use a reference whose value
 has gone out of scope</span>
@@ -293,8 +291,7 @@ whether all borrows are valid. Listing 10-18 shows the same code as Listing
                               //          |
         println!(&quot;r: {}&quot;, r); //          |
     }                         // ---------+
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 <span class="caption">Listing 10-18: Annotations of the lifetimes of `r` and
 `x`, named `'a` and `'b`, respectively</span>
@@ -327,8 +324,7 @@ compiles without any errors.
         println!(&quot;r: {}&quot;, r); //   |       |
                               // --+       |
     }                         // ----------+
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-19: A valid reference because the data has a
 longer lifetime than the reference</span>
@@ -372,8 +368,7 @@ longest string is abcd`.
     let result = longest(string1.as_str(), string2);
     // 最長の文字列は、{}です
     println!(&quot;The longest string is {}&quot;, result);
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 10-20: A `main` function that calls the `longest`
 function to find the longer of two string slices</span>
@@ -414,8 +409,7 @@ won’t compile.
     } else {
         y
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 10-21: An implementation of the `longest`
 function that returns the longer of two string slices but does not yet
@@ -512,8 +506,7 @@ reference to an `i32` that also has the lifetime `'a`.
 &amp;'a i32     // a reference with an explicit lifetime
             // 明示的なライフタイム付きの参照
 &amp;'a mut i32 // a mutable reference with an explicit lifetime
-            // 明示的なライフタイム付きの可変参照
-</code></pre>
+            // 明示的なライフタイム付きの可変参照</code></pre>
 <!--
 One lifetime annotation by itself doesn’t have much meaning, because the
 annotations are meant to tell Rust how generic lifetime parameters of multiple
@@ -564,8 +557,7 @@ Listing 10-22.
     } else {
         y
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 10-22: The `longest` function definition
 specifying that all the references in the signature must have the same lifetime
@@ -657,8 +649,7 @@ a straightforward example.
 </span><span class="boring">    } else {
 </span><span class="boring">        y
 </span><span class="boring">    }
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-23: Using the `longest` function with
 references to `String` values that have different concrete lifetimes</span>
@@ -708,8 +699,7 @@ compile.
 </span><span class="boring">    } else {
 </span><span class="boring">        y
 </span><span class="boring">    }
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 <span class="caption">Listing 10-24: Attempting to use `result` after `string2`
 has gone out of scope</span>
@@ -798,8 +788,7 @@ following code will compile:
 </span><span class="boring">
 </span>fn longest&lt;'a&gt;(x: &amp;'a str, y: &amp;str) -&gt; &amp;'a str {
     x
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 In this example, we’ve specified a lifetime parameter `'a` for the parameter
 `x` and the return type, but not for the parameter `y`, because the lifetime of
@@ -835,8 +824,7 @@ this attempted implementation of the `longest` function that won’t compile:
     // 本当に長い文字列
     let result = String::from(&quot;really long string&quot;);
     result.as_str()
-}
-</code></pre>
+}</code></pre>
 <!--
 Here, even though we’ve specified a lifetime parameter `'a` for the return
 type, this implementation will fail to compile because the return value
@@ -917,8 +905,7 @@ fn main() {
     let i = ImportantExcerpt {
         part: first_sentence,
     };
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 10-25: A struct that holds a reference, so its
 definition needs a lifetime annotation</span>
@@ -990,8 +977,7 @@ Chapter 4 we had a function in Listing 4-9, which is shown again in Listing
 </span><span class="boring">    // Because string literals *are* string slices already,
 </span><span class="boring">    // this works too, without the slice syntax!
 </span><span class="boring">    let word = first_word(my_string_literal);
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-26: A function we defined in Listing 4-9 that
 compiled without lifetime annotations, even though the parameter and return
@@ -1007,8 +993,7 @@ signature would have been written like this:
 <p>この関数がライフタイム注釈なしでコンパイルできる理由には、Rustの歴史が関わっています: 昔のバージョンのRust(1.0以前)では、
 全参照に明示的なライフタイムが必要だったので、このコードはコンパイルできませんでした。
 その頃、関数シグニチャはこのように記述されていたのです:</p>
-<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {
-</code></pre>
+<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {</code></pre>
 <!--
 After writing a lot of Rust code, the Rust team found that Rust programmers
 were entering the same lifetime annotations over and over in particular
@@ -1103,8 +1088,7 @@ with the references:
 -->
 <p>コンパイラの立場になってみましょう。これらの規則を適用して、リスト10-26の<code>first_word</code>関数のシグニチャの参照のライフタイムが何か計算します。
 シグニチャは、参照に紐づけられるライフタイムがない状態から始まります:</p>
-<pre><code class="language-rust ignore">fn first_word(s: &amp;str) -&gt; &amp;str {
-</code></pre>
+<pre><code class="language-rust ignore">fn first_word(s: &amp;str) -&gt; &amp;str {</code></pre>
 <!--
 Then the compiler applies the first rule, which specifies that each parameter
 gets its own lifetime. We’ll call it `'a` as usual, so now the signature is
@@ -1112,8 +1096,7 @@ this:
 -->
 <p>そうして、コンパイラは最初の規則を適用し、各引数が独自のライフタイムを得ると指定します。
 それを通常通り<code>'a</code>と呼ぶので、シグニチャはこうなります:</p>
-<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;str {
-</code></pre>
+<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;str {</code></pre>
 <!--
 The second rule applies because there is exactly one input lifetime. The second
 rule specifies that the lifetime of the one input parameter gets assigned to
@@ -1121,8 +1104,7 @@ the output lifetime, so the signature is now this:
 -->
 <p>1つだけ入力ライフタイムがあるので、2番目の規則を適用します。2番目の規則は、1つの入力引数のライフタイムが、
 出力引数に代入されると指定するので、シグニチャはこうなります:</p>
-<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {
-</code></pre>
+<pre><code class="language-rust ignore">fn first_word&lt;'a&gt;(s: &amp;'a str) -&gt; &amp;'a str {</code></pre>
 <!--
 Now all the references in this function signature have lifetimes, and the
 compiler can continue its analysis without needing the programmer to annotate
@@ -1135,16 +1117,14 @@ Let’s look at another example, this time using the `longest` function that had
 no lifetime parameters when we started working with it in Listing 10-21:
 -->
 <p>別の例に目を向けましょう。今回は、リスト10-21で取り掛かったときにはライフタイム引数がなかった<code>longest</code>関数です:</p>
-<pre><code class="language-rust ignore">fn longest(x: &amp;str, y: &amp;str) -&gt; &amp;str {
-</code></pre>
+<pre><code class="language-rust ignore">fn longest(x: &amp;str, y: &amp;str) -&gt; &amp;str {</code></pre>
 <!--
 Let’s apply the first rule: each parameter gets its own lifetime. This time we
 have two parameters instead of one, so we have two lifetimes:
 -->
 <p>最初の規則を適用しましょう: 各引数が独自のライフタイムを得るのです。今回は、
 1つではなく2つ引数があるので、ライフタイムも2つです:</p>
-<pre><code class="language-rust ignore">fn longest&lt;'a, 'b&gt;(x: &amp;'a str, y: &amp;'b str) -&gt; &amp;str {
-</code></pre>
+<pre><code class="language-rust ignore">fn longest&lt;'a, 'b&gt;(x: &amp;'a str, y: &amp;'b str) -&gt; &amp;str {</code></pre>
 <!--
 You can see that the second rule doesn’t apply because there is more than one
 input lifetime. The third rule doesn’t apply either, because `longest` is a
@@ -1223,8 +1203,7 @@ First, we’ll use a method named `level` whose only parameter is a reference to
 </span><span class="boring">    let i = ImportantExcerpt {
 </span><span class="boring">        part: first_sentence,
 </span><span class="boring">    };
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 The lifetime parameter declaration after `impl` and its use after the type name
 are required, but we’re not required to annotate the lifetime of the reference
@@ -1260,8 +1239,7 @@ Here is an example where the third lifetime elision rule applies:
 </span><span class="boring">    let i = ImportantExcerpt {
 </span><span class="boring">        part: first_sentence,
 </span><span class="boring">    };
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 There are two input lifetimes, so Rust applies the first lifetime elision rule
 and gives both `&self` and `announcement` their own lifetimes. Then, because
@@ -1283,13 +1261,11 @@ literals have the `'static` lifetime, which we can annotate as follows:
 -->
 <p>議論する必要のある1種の特殊なライフタイムが、<code>'static</code>であり、これは、この参照がプログラムの全期間生存<em>できる</em>事を意味します。
 文字列リテラルは全て<code>'static</code>ライフタイムになり、次のように注釈できます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// 僕は静的ライフタイムを持ってるよ
 let s: &amp;'static str = &quot;I have a static lifetime.&quot;;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 The text of this string is stored directly in the program’s binary, which
 is always available. Therefore, the lifetime of all string literals is
@@ -1349,8 +1325,7 @@ where
     } else {
         y
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 This is the `longest` function from Listing 10-22 that returns the longer of
 two string slices. But now it has an extra parameter named `ann` of the generic
@@ -1433,21 +1408,21 @@ Rust so you can make sure your code is working the way it should.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

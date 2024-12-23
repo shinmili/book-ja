@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -180,8 +179,7 @@ value in cents, as shown here in Listing 6-3.
 -->
 <p>コインについて話したので、それを<code>match</code>を使用する例にとってみましょう！数え上げ装置と同じ要領で未知のアメリカコインを一枚取り、
 どの種類のコインなのか決定し、その価値をセントで返す関数をリスト6-3で示したように記述することができます。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>enum Coin {
     Penny,
@@ -198,8 +196,7 @@ fn value_in_cents(coin: Coin) -&gt; u32 {
         Coin::Quarter =&gt; 25,
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 6-3: An enum and a `match` expression that has
 the variants of the enum as its patterns.</span>
@@ -253,8 +250,7 @@ a `Coin::Penny` but would still return the last value of the block, `1`:
 これに倣っています。マッチのアームで複数行のコードを走らせたいのなら、波かっこを使用することができます。
 例えば、以下のコードは、メソッドが<code>Coin::Penny</code>とともに呼び出されるたびに「Lucky penny!」と表示しつつ、
 ブロックの最後の値、<code>1</code>を返すでしょう。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">enum Coin {
 </span><span class="boring">   Penny,
@@ -274,8 +270,7 @@ a `Coin::Penny` but would still return the last value of the block, `1`:
         Coin::Quarter =&gt; 25,
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 ### Patterns that Bind to Values
 -->
@@ -318,8 +313,7 @@ Quarter(UsState),
 }
 ```
 -->
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug)] // すぐに州を点検できるように
 enum UsState {
@@ -334,8 +328,7 @@ enum Coin {
     Dime,
     Quarter(UsState),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 6-4: A `Coin` enum in which the `Quarter` variant
 also holds a `UsState` value</span>
@@ -358,8 +351,7 @@ quarter’s state. Then we can use `state` in the code for that arm, like so:
 <p>このコードのmatch式では、<code>Coin::Quarter</code>列挙子の値にマッチする<code>state</code>という名の変数をパターンに追加します。
 <code>Coin::Quarter</code>がマッチすると、<code>state</code>変数はそのクォーターのstateの値に束縛されます。それから、
 <code>state</code>をそのアームのコードで使用できます。以下のようにですね:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">#[derive(Debug)]
 </span><span class="boring">enum UsState {
@@ -385,8 +377,7 @@ quarter’s state. Then we can use `state` in the code for that arm, like so:
         },
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 If we were to call `value_in_cents(Coin::Quarter(UsState::Alaska))`, `coin`
 would be `Coin::Quarter(UsState::Alaska)`. When we compare that value with each
@@ -427,8 +418,7 @@ This function is very easy to write, thanks to `match`, and will look like
 Listing 6-5.
 -->
 <p><code>match</code>のおかげで、この関数は大変書きやすく、リスト6-5のような見た目になります。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn plus_one(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
     match x {
@@ -440,8 +430,7 @@ Listing 6-5.
 let five = Some(5);
 let six = plus_one(five);
 let none = plus_one(None);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 6-5: A function that uses a `match` expression on
 an `Option<i32>`</span>
@@ -454,15 +443,13 @@ value `Some(5)`. We then compare that against each match arm.
 -->
 <p><code>plus_one</code>の最初の実行についてもっと詳しく検証しましょう。<code>plus_one(five)</code>と呼び出した時、
 <code>plus_one</code>の本体の変数<code>x</code>は<code>Some(5)</code>になります。そして、これをマッチの各アームと比較します。</p>
-<pre><code class="language-rust ignore">None =&gt; None,
-</code></pre>
+<pre><code class="language-rust ignore">None =&gt; None,</code></pre>
 <!--
 The `Some(5)` value doesn’t match the pattern `None`, so we continue to the
 next arm.
 -->
 <p><code>Some(5)</code>という値は、<code>None</code>というパターンにはマッチしませんので、次のアームに処理が移ります。</p>
-<pre><code class="language-rust ignore">Some(i) =&gt; Some(i + 1),
-</code></pre>
+<pre><code class="language-rust ignore">Some(i) =&gt; Some(i + 1),</code></pre>
 <!--
 Does `Some(5)` match `Some(i)`? Why yes it does! We have the same variant. The
 `i` binds to the value contained in `Some`, so `i` takes the value `5`. The
@@ -481,8 +468,7 @@ Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` is
 -->
 <p>さて、<code>x</code>が<code>None</code>になるリスト6-5の2回目の<code>plus_one</code>の呼び出しを考えましょう。<code>match</code>に入り、
 最初のアームと比較します。</p>
-<pre><code class="language-rust ignore">None =&gt; None,
-</code></pre>
+<pre><code class="language-rust ignore">None =&gt; None,</code></pre>
 <!--
 It matches! There’s no value to add to, so the program stops and returns the
 `None` value on the right side of `=>`. Because the first arm matched, no other
@@ -516,8 +502,7 @@ of our `plus_one` function that has a bug and won't compile:
     match x {
         Some(i) =&gt; Some(i + 1),
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 We didn’t handle the `None` case, so this code will cause a bug. Luckily, it’s
 a bug Rust knows how to catch. If we try to compile this code, we’ll get this
@@ -559,8 +544,7 @@ special pattern `_` instead:
 <p>Rustには、全ての可能性を列挙したくない時に使用できるパターンもあります。例えば、<code>u8</code>は、有効な値として、
 0から255までを取ります。1、3、5、7の値にだけ興味があったら、0、2、4、6、8、9と255までの数値を列挙する必要に迫られたくはないです。
 幸運なことに、する必要はありません: 代わりに特別なパターンの<code>_</code>を使用できます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let some_u8_value = 0u8;
 match some_u8_value {
@@ -570,8 +554,7 @@ match some_u8_value {
     7 =&gt; println!(&quot;seven&quot;),
     _ =&gt; (),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 The `_` pattern will match any value. By putting it after our other arms, the
 `_` will match all the possible cases that aren’t specified before it. The `()`
@@ -622,21 +605,21 @@ care about only *one* of the cases. For this situation, Rust provides `if let`.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -305,15 +304,13 @@ Listing 19-1 shows how to create an immutable and a mutable raw pointer from
 references.
 -->
 <p>リスト19-1は、参照から不変と可変な生ポインタを生成する方法を示しています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut num = 5;
 
 let r1 = &amp;num as *const i32;
 let r2 = &amp;mut num as *mut i32;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-1: Creating raw pointers from references</span>
 -->
@@ -347,13 +344,11 @@ Usually, there is no good reason to write code like this, but it is possible.
 任意のメモリを使用しようとすることは未定義です: そのアドレスにデータがある可能性もあるし、ない可能性もあり、
 コンパイラがコードを最適化してメモリアクセスがなくなる可能性もあるし、プログラムがセグメンテーションフォールトでエラーになる可能性もあります。
 通常、このようなコードを書くいい理由はありませんが、可能ではあります。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let address = 0x012345usize;
 let r = address as *const i32;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-2: Creating a raw pointer to an arbitrary
 memory address</span>
@@ -366,8 +361,7 @@ dereference operator `*` on a raw pointer that requires an `unsafe` block.
 -->
 <p>safeコードで生ポインタを生成できるけれども、生ポインタを<em>参照外し</em>して指しているデータを読むことはできないことを思い出してください。
 リスト19-3では、<code>unsafe</code>ブロックが必要になる参照外し演算子の<code>*</code>を生ポインタに使っています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut num = 5;
 
@@ -378,8 +372,7 @@ unsafe {
     println!(&quot;r1 is: {}&quot;, *r1);
     println!(&quot;r2 is: {}&quot;, *r2);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-3: Dereferencing raw pointers within an
 `unsafe` block</span>
@@ -441,16 +434,14 @@ Here is an unsafe function named `dangerous` that doesn’t do anything in its
 body:
 -->
 <p>こちらは、本体で何もしない<code>dangerous</code>というunsafeな関数です:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>unsafe fn dangerous() {}
 
 unsafe {
     dangerous();
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 We must call the `dangerous` function within a separate `unsafe` block. If we
 try to call `dangerous` without the `unsafe` block, we’ll get an error:
@@ -497,8 +488,7 @@ argument. Listing 19-4 shows how to use `split_at_mut`.
 なんらかのunsafeコードが必要になる標準ライブラリの関数<code>split_at_mut</code>を学び、その実装方法を探究しましょう。
 この安全なメソッドは、可変なスライスに定義されています: スライスを1つ取り、引数で与えられた添え字でスライスを分割して2つにします。
 リスト19-4は、<code>split_at_mut</code>の使用法を示しています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut v = vec![1, 2, 3, 4, 5, 6];
 
@@ -508,8 +498,7 @@ let (a, b) = r.split_at_mut(3);
 
 assert_eq!(a, &amp;mut [1, 2, 3]);
 assert_eq!(b, &amp;mut [4, 5, 6]);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-4: Using the safe `split_at_mut`
 function</span>
@@ -530,8 +519,7 @@ of `i32` values rather than for a generic type `T`.
 
     (&amp;mut slice[..mid],
      &amp;mut slice[mid..])
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 19-5: An attempted implementation of
 `split_at_mut` using only safe Rust</span>
@@ -584,8 +572,7 @@ Listing 19-6 shows how to use an `unsafe` block, a raw pointer, and some calls
 to unsafe functions to make the implementation of `split_at_mut` work.
 -->
 <p>リスト19-6は<code>unsafe</code>ブロック、生ポインタ、unsafe関数への呼び出しをして<code>split_at_mut</code>の実装が動くようにする方法を示しています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::slice;
 
@@ -600,8 +587,7 @@ fn split_at_mut(slice: &amp;mut [i32], mid: usize) -&gt; (&amp;mut [i32], &amp;m
          slice::from_raw_parts_mut(ptr.offset(mid as isize), len - mid))
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-6: Using unsafe code in the implementation of
 the `split_at_mut` function</span>
@@ -665,8 +651,7 @@ location and creates a slice 10,000 items long:
 -->
 <p>対照的に、リスト19-7の<code>slice::from_raw_parts_mut</code>の使用は、スライスが使用されるとクラッシュする可能性が高いでしょう。
 このコードは任意のメモリアドレスを取り、10,000要素の長さのスライスを生成します:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::slice;
 
@@ -676,8 +661,7 @@ let r = address as *mut i32;
 let slice = unsafe {
     slice::from_raw_parts_mut(r, 10000)
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-7: Creating a slice from an arbitrary memory
 location</span>
@@ -729,8 +713,7 @@ fn main() {
         // -3の絶対値は、Cによると{}
         println!(&quot;Absolute value of -3 according to C: {}&quot;, abs(-3));
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-8: Declaring and calling an `extern` function
 defined in another language</span>
@@ -781,16 +764,14 @@ ABIは関数の呼び出し方法をアセンブリレベルで定義します�
 全ての言語のコンパイラは、少々異なる方法でマングルを行うので、Rustの関数が他の言語で名前付けできるように、
 Rustコンパイラの名前マングルをオフにしなければならないのです。</p>
 <p>以下の例では、共有ライブラリにコンパイルし、Cからリンクした後に<code>call_from_c</code>関数をCコードからアクセスできるようにしています:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[no_mangle]
 pub extern &quot;C&quot; fn call_from_c() {
     // CからRust関数を呼び出したばかり！
     println!(&quot;Just called a Rust function from C!&quot;);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>この<code>extern</code>の使用法では、<code>unsafe</code>は必要ありません。</p>
 </blockquote>
 <!--
@@ -821,8 +802,7 @@ value.
 fn main() {
 	// 名前は: {}
     println!(&quot;name is: {}&quot;, HELLO_WORLD);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-9: Defining and using an immutable static
 variable</span>
@@ -877,8 +857,7 @@ fn main() {
     unsafe {
         println!(&quot;COUNTER: {}&quot;, COUNTER);
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-10: Reading from or writing to a mutable
 static variable is unsafe</span>
@@ -918,8 +897,7 @@ compiler can’t verify. We can declare that a trait is `unsafe` by adding the
 <p><code>unsafe</code>でのみ動く最後の行動は、unsafeなトレイトを実装することです。少なくとも、1つのメソッドにコンパイラが確かめられないなんらかの不変条件があると、
 トレイトはunsafeになります。<code>trait</code>の前に<code>unsafe</code>キーワードを追加し、トレイトの実装も<code>unsafe</code>でマークすることで、
 トレイトが<code>unsafe</code>であると宣言できます。リスト19-11のようにですね。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>unsafe trait Foo {
     // methods go here
@@ -930,8 +908,7 @@ unsafe impl Foo for i32 {
     // method implementations go here
     // メソッドの実装がここに来る
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-11: Defining and implementing an unsafe
 trait</span>
@@ -1007,21 +984,21 @@ annotation makes it easier to track down the source of problems if they occur.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

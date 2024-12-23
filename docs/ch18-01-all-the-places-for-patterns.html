@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -252,8 +251,7 @@ input.
         // 青を背景色に使用します
         println!(&quot;Using blue as the background color&quot;);
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-1: Mixing `if let`, `else if`, `else if let`,
 and `else`</span>
@@ -311,8 +309,7 @@ the values in the vector in the opposite order in which they were pushed:
 <p><code>if let</code>と構成が似て、<code>while let</code>条件分岐ループは、パターンが合致し続ける限り、<code>while</code>ループを走らせます。
 リスト18-2の例は、ベクタをスタックとして使用する<code>while let</code>ループを示し、
 ベクタの値をプッシュしたのとは逆順に出力します:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut stack = Vec::new();
 
@@ -323,8 +320,7 @@ stack.push(3);
 while let Some(top) = stack.pop() {
     println!(&quot;{}&quot;, top);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-2: Using a `while let` loop to print values
 for as long as `stack.pop()` returns `Some`</span>
@@ -358,16 +354,14 @@ Listing 18-3 demonstrates how to use a pattern in a `for` loop to destructure,
 or break apart, a tuple as part of the `for` loop.
 -->
 <p>リスト18-3は<code>for</code>ループでパターンを使用して<code>for</code>ループの一部としてタプルを分配あるいは、分解する方法をデモしています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let v = vec!['a', 'b', 'c'];
 
 for (index, value) in v.iter().enumerate() {
     println!(&quot;{} is at index {}&quot;, value, index);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-3: Using a pattern in a `for` loop to
 destructure a tuple</span>
@@ -403,12 +397,10 @@ variable assignment with `let`:
 -->
 <p>この章に先駆けて、<code>match</code>と<code>if let</code>でパターンを使用することだけ明示的に議論してきましたが、
 実は<code>let</code>文を含む他の箇所でもパターンを使用してきたのです。例として、この<code>let</code>での率直な変数代入を考えてください:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 5;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 Throughout this book, we’ve used `let` like this hundreds of times, and
 although you might not have realized it, you were using patterns! More
@@ -436,12 +428,10 @@ To see the pattern matching aspect of `let` more clearly, consider Listing
 -->
 <p><code>let</code>のパターンマッチングの観点をよりはっきり確認するためにリスト18-4を考えてください。
 これは<code>let</code>でパターンを使用し、タプルを分配します。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let (x, y, z) = (1, 2, 3);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-4: Using a pattern to destructure a tuple and
 create three variables at once</span>
@@ -464,8 +454,7 @@ elements into two variables, which won’t work.
 -->
 <p>パターンの要素数がタプルの要素数と一致しない場合、全体の型が一致せず、コンパイルエラーになるでしょう。
 例えば、リスト18-5は、3要素のタプルを2つの変数に分配しようとしているところを表示していて、動きません。</p>
-<pre><code class="language-rust ignore">let (x, y) = (1, 2, 3);
-</code></pre>
+<pre><code class="language-rust ignore">let (x, y) = (1, 2, 3);</code></pre>
 <!--
 <span class="caption">Listing 18-5: Incorrectly constructing a pattern whose
 variables don’t match the number of elements in the tuple</span>
@@ -506,15 +495,13 @@ declares a function named `foo` that takes one parameter named `x` of type
 -->
 <p>関数の引数もパターンにできます。リスト18-6のコードは、型<code>i32</code>の<code>x</code>という引数1つを取る<code>foo</code>という関数を宣言していますが、
 これまでに馴染み深くなっているはずです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo(x: i32) {
     // コードがここに来る
     // code goes here
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-6: A function signature uses patterns in the
 parameters</span>
@@ -539,8 +526,7 @@ as we pass it to a function.
 fn main() {
     let point = (3, 5);
     print_coordinates(&amp;point);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-7: A function with parameters that destructure
 a tuple</span>
@@ -600,21 +586,21 @@ these two concepts next.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

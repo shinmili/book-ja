@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -193,16 +192,14 @@ shown in Listing 19-20.
 <p>関連型があるトレイトの一例は、標準ライブラリが提供する<code>Iterator</code>トレイトです。その関連型は<code>Item</code>と名付けられ、
 <code>Iterator</code>トレイトを実装している型が走査している値の型の代役を務めます。第13章の「<code>Iterator</code>トレイトと<code>next</code>メソッド」節で、
 <code>Iterator</code>トレイトの定義は、リスト19-20に示したようなものであることに触れました。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub trait Iterator {
     type Item;
 
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-20: The definition of the `Iterator` trait
 that has an associated type `Item`</span>
@@ -243,22 +240,19 @@ Listing 13-21, we specified that the `Item` type was `u32`:
     type Item = u32;
 
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
-        // --snip--
-</code></pre>
+        // --snip--</code></pre>
 <!--
 This syntax seems comparable to that of generics. So why not just define the
 `Iterator` trait with generics, as shown in Listing 19-21?
 -->
 <p>この記法は、ジェネリクスと比較可能に思えます。では、何故単純にリスト19-21のように、
 <code>Iterator</code>トレイトをジェネリクスで定義しないのでしょうか？</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub trait Iterator&lt;T&gt; {
     fn next(&amp;mut self) -&gt; Option&lt;T&gt;;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-21: A hypothetical definition of the
 `Iterator` trait using generics</span>
@@ -350,8 +344,7 @@ impl Add for Point {
 fn main() {
     assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
                Point { x: 3, y: 3 });
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-22: Implementing the `Add` trait to overload
 the `+` operator for `Point` instances</span>
@@ -370,16 +363,14 @@ The default generic type in this code is within the `Add` trait. Here is its
 definition:
 -->
 <p>このコードの既定のジェネリック型は、<code>Add</code>トレイト内にあります。こちらがその定義です:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>trait Add&lt;RHS=Self&gt; {
     type Output;
 
     fn add(self, rhs: RHS) -&gt; Self::Output;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code should look generally familiar: a trait with one method and an
 associated type. The new part is `RHS=Self`: this syntax is called *default
@@ -415,8 +406,7 @@ implementation of `Add` do the conversion correctly. We can implement `Add` for
 <span class="filename">Filename: src/lib.rs</span>
 -->
 <p><span class="filename">ファイル名: src/lib.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::ops::Add;
 
@@ -430,8 +420,7 @@ impl Add&lt;Meters&gt; for Millimeters {
         Millimeters(self.0 + (other.0 * 1000))
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-23: Implementing the `Add` trait on
 `Millimeters` to add `Millimeters` to `Meters`</span>
@@ -502,8 +491,7 @@ on it. Each `fly` method does something different.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>trait Pilot {
     fn fly(&amp;self);
@@ -535,8 +523,7 @@ impl Human {
         println!(&quot;*waving arms furiously*&quot;);
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-24: Two traits are defined to have a `fly`
 method and are implemented on the `Human` type, and a `fly` method is
@@ -585,8 +572,7 @@ the method that is directly implemented on the type, as shown in Listing 19-25.
 </span>fn main() {
     let person = Human;
     person.fly();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-25: Calling `fly` on an instance of
 `Human`</span>
@@ -642,8 +628,7 @@ Listing 19-26 demonstrates this syntax.
     Pilot::fly(&amp;person);
     Wizard::fly(&amp;person);
     person.fly();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-26: Specifying which trait’s `fly` method we
 want to call</span>
@@ -713,8 +698,7 @@ impl Animal for Dog {
 fn main() {
     // 赤ちゃん犬は{}と呼ばれる
     println!(&quot;A baby dog is called a {}&quot;, Dog::baby_name());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-27: A trait with an associated function and a
 type with an associated function of the same name that also implements the
@@ -757,8 +741,7 @@ Listing 19-28, we’ll get a compilation error.
 <p><span class="filename">ファイル名: src/main.rs</span></p>
 <pre><code class="language-rust ignore">fn main() {
     println!(&quot;A baby dog is called a {}&quot;, Animal::baby_name());
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 19-28: Attempting to call the `baby_name`
 function from the `Animal` trait, but Rust doesn’t know which implementation to
@@ -813,8 +796,7 @@ demonstrates how to use fully qualified syntax.
 </span><span class="boring">
 </span>fn main() {
     println!(&quot;A baby dog is called a {}&quot;, &lt;Dog as Animal&gt;::baby_name());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-29: Using fully qualified syntax to specify
 that we want to call the `baby_name` function from the `Animal` trait as
@@ -837,8 +819,7 @@ implemented on `Dog` by saying that we want to treat the `Dog` type as an
 In general, fully qualified syntax is defined as follows:
 -->
 <p>一般的に、フルパス記法は、以下のように定義されています:</p>
-<pre><code class="language-rust ignore">&lt;Type as Trait&gt;::function(receiver_if_method, next_arg, ...);
-</code></pre>
+<pre><code class="language-rust ignore">&lt;Type as Trait&gt;::function(receiver_if_method, next_arg, ...);</code></pre>
 <!--
 For associated functions, there would not be a `receiver`: there would only be
 the list of other arguments. You could use fully qualified syntax everywhere
@@ -894,8 +875,7 @@ the trait. Listing 19-30 shows an implementation of the `OutlinePrint` trait.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::fmt;
 
@@ -910,8 +890,7 @@ trait OutlinePrint: fmt::Display {
         println!(&quot;{}&quot;, &quot;*&quot;.repeat(len + 4));
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 19-30: Implementing the `OutlinePrint` trait that
 requires the functionality from `Display`</span>
@@ -937,8 +916,7 @@ doesn’t implement `Display`, such as the `Point` struct:
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">trait OutlinePrint {}
 </span>struct Point {
@@ -947,8 +925,7 @@ doesn’t implement `Display`, such as the `Point` struct:
 }
 
 impl OutlinePrint for Point {}
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 We get an error saying that `Display` is required but not implemented:
 -->
@@ -972,8 +949,7 @@ To fix this, we implement `Display` on `Point` and satisfy the constraint that
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">struct Point {
 </span><span class="boring">    x: i32,
@@ -987,8 +963,7 @@ impl fmt::Display for Point {
         write!(f, &quot;({}, {})&quot;, self.x, self.y)
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 Then implementing the `OutlinePrint` trait on `Point` will compile
 successfully, and we can call `outline_print` on a `Point` instance to display
@@ -1047,8 +1022,7 @@ impl fmt::Display for Wrapper {
 fn main() {
     let w = Wrapper(vec![String::from(&quot;hello&quot;), String::from(&quot;world&quot;)]);
     println!(&quot;w = {}&quot;, w);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 19-31: Creating a `Wrapper` type around
 `Vec<String>` to implement `Display`</span>
@@ -1120,21 +1094,21 @@ at some advanced ways to interact with Rust’s type system.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

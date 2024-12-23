@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -234,8 +233,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-1: The test module and function generated
 automatically by `cargo new`</span>
@@ -350,8 +348,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 Then run `cargo test` again. The output now shows `exploration` instead of
 `it_works`:
@@ -405,8 +402,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-3: Adding a second test that will fail because
 we call the `panic!` macro</span>
@@ -516,8 +512,7 @@ impl Rectangle {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-5: Using the `Rectangle` struct and its
 `can_hold` method from Chapter 5</span>
@@ -568,8 +563,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-6: A test for `can_hold` that checks whether a
 larger rectangle can indeed hold a smaller rectangle</span>
@@ -670,8 +664,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 Because the correct result of the `can_hold` function in this case is `false`,
 we need to negate that result before we pass it to the `assert!` macro. As a
@@ -751,8 +744,7 @@ impl Rectangle {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span><span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 Running the tests now produces the following:
 -->
@@ -834,8 +826,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-7: Testing the function `add_two` using the
 `assert_eq!` macro</span>
@@ -889,8 +880,7 @@ instead add `3`:
 </span><span class="boring">    }
 </span><span class="boring">}
 </span><span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 Run the tests again:
 -->
@@ -1031,8 +1021,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 The requirements for this program haven’t been agreed upon yet, and we’re
 pretty sure the `Hello` text at the beginning of the greeting will change. We
@@ -1064,8 +1053,7 @@ Let’s introduce a bug into this code by changing `greeting` to not include
 </span><span class="boring">    }
 </span><span class="boring">}
 </span><span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 Running this test produces the following:
 -->
@@ -1121,8 +1109,7 @@ filled in with the actual value we got from the `greeting` function:
             result
         );
     }
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 Now when we run the test, we’ll get a more informative error message:
 -->
@@ -1215,8 +1202,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-8: Testing that a condition will cause a
 `panic!`</span>
@@ -1278,8 +1264,7 @@ impl Guess {
 </span><span class="boring">    }
 </span><span class="boring">}
 </span><span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 When we run the test in Listing 11-8, it will fail:
 -->
@@ -1369,8 +1354,7 @@ mod tests {
     }
 }
 <span class="boring">
-</span><span class="boring">fn main() {}
-</span></code></pre></pre>
+</span><span class="boring">fn main() {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 11-9: Testing that a condition will cause a
 `panic!` with a particular panic message</span>
@@ -1433,8 +1417,7 @@ fails, let’s again introduce a bug into our code by swapping the bodies of the
 </span><span class="boring">    fn greater_than_100() {
 </span><span class="boring">        Guess::new(200);
 </span><span class="boring">    }
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 This time when we run the `should_panic` test, it will fail:
 -->
@@ -1486,8 +1469,7 @@ that use `Result<T, E>`! Here’s the test from Listing 11-1, rewritten to use
 <p>これまでは、失敗するとパニックするようなテストを書いてきましたが、
 <code>Result&lt;T, E&gt;</code>を使うようなテストを書くこともできます！
 以下は、Listing 11-1のテストを、<code>Result&lt;T, E&gt;</code>を使い、パニックする代わりに<code>Err</code>を返すように書き直したものです：</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[cfg(test)]
 mod tests {
@@ -1500,8 +1482,7 @@ mod tests {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 The `it_works` function now has a return type, `Result<(), String>`. In the
 body of the function, rather than calling the `assert_eq!` macro, we return
@@ -1564,21 +1545,21 @@ test`.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

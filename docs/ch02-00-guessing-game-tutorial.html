@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -223,8 +222,7 @@ you. Check out the *src/main.rs* file:
 <p><span class="filename">ファイル名：src/main.rs</span></p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
     println!(&quot;Hello, world!&quot;);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 Now let’s compile this “Hello, world!” program and run it in the same step
 using the `cargo run` command:
@@ -285,8 +283,7 @@ fn main() {
         .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 
     println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 2-1: Code that gets a guess from the user and
 prints it</span>
@@ -316,8 +313,7 @@ standard library, known as `std`:
 </span><span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 By default, Rust has a few items defined in the standard library that it brings
 into the scope of every program. This set is called the *prelude*, and you can
@@ -352,8 +348,7 @@ program:
 </span><span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 The `fn` syntax declares a new function, the parentheses, `()`, indicate there
 are no parameters, and the curly bracket, `{`, starts the body of the function.
@@ -378,8 +373,7 @@ the screen:
 </span><span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 This code is printing a prompt stating what the game is and requesting input
 from the user.
@@ -408,8 +402,7 @@ Next, we’ll create a *variable* to store the user input, like this:
 </span><span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 Now the program is getting interesting! There’s a lot going on in this little
 line. We use the `let` statement to create the variable. Here’s another example:
@@ -418,8 +411,7 @@ line. We use the `let` statement to create the variable. Here’s another exampl
 この小さな行の中でいろいろなことが起きています。
 <code>let</code>文を使って変数を作っています。
 別の例も見てみましょう。</p>
-<pre><code class="language-rust ignore">let apples = 5;
-</code></pre>
+<pre><code class="language-rust ignore">let apples = 5;</code></pre>
 <!--
 This line creates a new variable named `apples` and binds it to the value 5. In
 Rust, variables are immutable by default. We’ll be discussing this concept in
@@ -433,8 +425,7 @@ Rustでは変数はデフォルトで不変（immutable）になります。
 <pre><code class="language-rust ignore">let apples = 5; // immutable
                 // 不変
 let mut bananas = 5; // mutable
-                     // 可変
-</code></pre>
+                     // 可変</code></pre>
 <!--
 > Note: The `//` syntax starts a comment that continues until the end of the
 > line. Rust ignores everything in comments. We’ll discuss comments in more
@@ -503,8 +494,7 @@ input:
 <span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 If we hadn’t imported the `io` library with `use std::io` at the beginning of
 the program, we could still use the function by writing this function call as
@@ -570,14 +560,12 @@ is this method:
 </span>        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 <span class="boring">
 </span><span class="boring">    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 We could have written this code as:
 -->
 <p>このコードは、こう書くこともできました。</p>
-<pre><code class="language-rust ignore">io::stdin().read_line(&amp;mut guess).expect(&quot;Failed to read line&quot;);
-</code></pre>
+<pre><code class="language-rust ignore">io::stdin().read_line(&amp;mut guess).expect(&quot;Failed to read line&quot;);</code></pre>
 <!--
 However, one long line is difficult to read, so it’s best to divide it. It’s
 often wise to introduce a newline and other whitespace to help break up long
@@ -695,8 +683,7 @@ the code so far:
 </span><span class="boring">        .expect(&quot;Failed to read line&quot;);     // 行の読み込みに失敗しました
 </span><span class="boring">
 </span>    println!(&quot;You guessed: {}&quot;, guess);     // 次のように予想しました: {}
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 This line prints the string that now contains the user’s input. The `{}` set of
 curly brackets is a placeholder: think of `{}` as little crab pincers that hold
@@ -711,15 +698,13 @@ values in one call to `println!` would look like this:
 波括弧をいくつか使えば複数の値を表示できます。
 最初の波括弧の組はフォーマット文字列のあとに並んだ最初の値に対応し、2組目は2番目の値、というように続いていきます。
 一回の<code>println!</code>の呼び出しで複数の値を表示するなら次のようになります。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 5;
 let y = 10;
 
 println!(&quot;x = {} and y = {}&quot;, x, y);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code would print `x = 5 and y = 10`.
 -->
@@ -1029,8 +1014,7 @@ fn main() {
         .expect(&quot;Failed to read line&quot;);
 
     println!(&quot;You guessed: {}&quot;, guess);
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 2-3: Adding code to generate a random
 number</span>
@@ -1161,8 +1145,7 @@ fn main() {
         Ordering::Greater =&gt; println!(&quot;Too big!&quot;),      //大きすぎ！
         Ordering::Equal =&gt; println!(&quot;You win!&quot;),        //やったね！
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 2-4: Handling the possible return values of
 comparing two numbers</span>
@@ -1181,8 +1164,7 @@ the three outcomes that are possible when you compare two values.
     Ordering::Less =&gt; println!(&quot;Too small!&quot;),
     Ordering::Greater =&gt; println!(&quot;Too big!&quot;),
     Ordering::Equal =&gt; println!(&quot;You win!&quot;),
-}
-</code></pre>
+}</code></pre>
 <!--
 Then we add five new lines at the bottom that use the `Ordering` type. The
 `cmp` method compares two values and can be called on anything that can be
@@ -1347,14 +1329,12 @@ by adding this line to the `main` function body:
         Ordering::Greater =&gt; println!(&quot;Too big!&quot;),
         Ordering::Equal =&gt; println!(&quot;You win!&quot;),
     }
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 The line is:
 -->
 <p>その行とはこれのことです。</p>
-<pre><code class="language-rust ignore">let guess: u32 = guess.trim().parse().expect(&quot;Please type a number!&quot;);
-</code></pre>
+<pre><code class="language-rust ignore">let guess: u32 = guess.trim().parse().expect(&quot;Please type a number!&quot;);</code></pre>
 <!--
 We create a variable named `guess`. But wait, doesn’t the program already have
 a variable named `guess`? It does, but helpfully Rust allows us to *shadow* the
@@ -1510,8 +1490,7 @@ more chances at guessing the number:
             Ordering::Equal =&gt; println!(&quot;You win!&quot;),
         }
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 As you can see, we’ve moved everything from the guess input prompt onward into
 a loop. Be sure to indent the lines inside the loop another four spaces each
@@ -1613,8 +1592,7 @@ Let’s program the game to quit when the user wins by adding a `break` statemen
             }
         }
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 Adding the `break` line after `You win!` makes the program exit the loop when
 the user guesses the secret number correctly. Exiting the loop also means
@@ -1678,8 +1656,7 @@ is converted from a `String` to a `u32`, as shown in Listing 2-5.
 </span><span class="boring">            }
 </span><span class="boring">        }
 </span><span class="boring">    }
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 <span class="caption">Listing 2-5: Ignoring a non-number guess and asking for
 another guess instead of crashing the program</span>
@@ -1800,8 +1777,7 @@ fn main() {
             }
         }
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 2-6: Complete guessing game code</span>
 -->
@@ -1882,21 +1858,21 @@ discusses structs and method syntax, and Chapter 6 explains how enums work.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

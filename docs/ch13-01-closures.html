@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -199,8 +198,7 @@ we passed in.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::thread;
 use std::time::Duration;
@@ -211,8 +209,7 @@ fn simulated_expensive_calculation(intensity: u32) -&gt; u32 {
     thread::sleep(Duration::from_secs(2));
     intensity
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-1: A function to stand in for a hypothetical
 calculation that takes about 2 seconds to run</span>
@@ -262,8 +259,7 @@ function we’ll use.
         simulated_random_number
     );
 }
-<span class="boring">fn generate_workout(intensity: u32, random_number: u32) {}
-</span></code></pre></pre>
+<span class="boring">fn generate_workout(intensity: u32, random_number: u32) {}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-2: A `main` function with hardcoded values to
 simulate user input and random number generation</span>
@@ -293,8 +289,7 @@ changes in this example will be made to this function.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -332,8 +327,7 @@ changes in this example will be made to this function.
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-3: The business logic that prints the workout
 plans based on the inputs and calls to the `simulated_expensive_calculation`
@@ -405,8 +399,7 @@ function into a variable, as shown in Listing 13-4.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -441,8 +434,7 @@ function into a variable, as shown in Listing 13-4.
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-4: Extracting the calls to
 `simulated_expensive_calculation` to one place and storing the result in the
@@ -484,8 +476,7 @@ the closure we’re introducing here.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -496,8 +487,7 @@ the closure we’re introducing here.
     num
 };
 <span class="boring">expensive_closure(5);
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-5: Defining a closure and storing it in the
 `expensive_closure` variable</span>
@@ -555,8 +545,7 @@ want to use, as shown in Listing 13-6.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -588,8 +577,7 @@ want to use, as shown in Listing 13-6.
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-6: Calling the `expensive_closure` we’ve
 defined</span>
@@ -663,8 +651,7 @@ would look like the definition shown in Listing 13-7.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -674,8 +661,7 @@ would look like the definition shown in Listing 13-7.
     thread::sleep(Duration::from_secs(2));
     num
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-7: Adding optional type annotations of the
 parameter and return value types in the closure</span>
@@ -696,8 +682,7 @@ the use of pipes and the amount of syntax that is optional:
 <pre><code class="language-rust ignore">fn  add_one_v1   (x: u32) -&gt; u32 { x + 1 }
 let add_one_v2 = |x: u32| -&gt; u32 { x + 1 };
 let add_one_v3 = |x|             { x + 1 };
-let add_one_v4 = |x|               x + 1  ;
-</code></pre>
+let add_one_v4 = |x|               x + 1  ;</code></pre>
 <!--
 The first line shows a function definition, and the second line shows a fully
 annotated closure definition. The third line removes the type annotations from
@@ -730,8 +715,7 @@ first time and a `u32` the second time, we’ll get an error.
 <pre><code class="language-rust ignore">let example_closure = |x| x;
 
 let s = example_closure(String::from(&quot;hello&quot;));
-let n = example_closure(5);
-</code></pre>
+let n = example_closure(5);</code></pre>
 <!--
 <span class="caption">Listing 13-8: Attempting to call a closure whose types
 are inferred with two different types</span>
@@ -829,8 +813,7 @@ and an optional result value.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct Cacher&lt;T&gt;
     where T: Fn(u32) -&gt; u32
@@ -838,8 +821,7 @@ and an optional result value.
     calculation: T,
     value: Option&lt;u32&gt;,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-9: Defining a `Cacher` struct that holds a
 closure in `calculation` and an optional result in `value`</span>
@@ -886,8 +868,7 @@ The logic around the `value` field we’ve just described is defined in Listing
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">struct Cacher&lt;T&gt;
 </span><span class="boring">    where T: Fn(u32) -&gt; u32
@@ -917,8 +898,7 @@ The logic around the `value` field we’ve just described is defined in Listing
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-10: The caching logic of `Cacher`</span>
 -->
@@ -967,8 +947,7 @@ Listing 13-11 shows how we can use this `Cacher` struct in the function
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::thread;
 </span><span class="boring">use std::time::Duration;
@@ -1029,8 +1008,7 @@ Listing 13-11 shows how we can use this `Cacher` struct in the function
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 13-11: Using `Cacher` in the `generate_workout`
 function to abstract away the caching logic</span>
@@ -1087,8 +1065,7 @@ fn call_with_different_values() {
     let v2 = c.value(2);
 
     assert_eq!(v2, 2);
-}
-</code></pre>
+}</code></pre>
 <!--
 This test creates a new `Cacher` instance with a closure that returns the value
 passed into it. We call the `value` method on this `Cacher` instance with an
@@ -1169,8 +1146,7 @@ that uses the `x` variable from the closure’s surrounding environment.
     let y = 4;
 
     assert!(equal_to_x(y));
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 13-12: Example of a closure that refers to a
 variable in its enclosing scope</span>
@@ -1200,8 +1176,7 @@ code won’t compile:
     let y = 4;
 
     assert!(equal_to_x(y));
-}
-</code></pre>
+}</code></pre>
 <!--
 We get an error:
 -->
@@ -1303,8 +1278,7 @@ yet compile.
     let y = vec![1, 2, 3];
 
     assert!(equal_to_x(y));
-}
-</code></pre>
+}</code></pre>
 <!--
 We receive the following error:
 -->
@@ -1379,21 +1353,21 @@ useful as function parameters, let’s move on to our next topic: iterators.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

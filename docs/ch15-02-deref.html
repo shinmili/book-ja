@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -194,8 +193,7 @@ reference to the data:
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 15-6: Using the dereference operator to follow a
 reference to an `i32` value</span>
@@ -256,8 +254,7 @@ reference; the dereference operator will work as shown in Listing 15-7:
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 15-7: Using the dereference operator on a
 `Box<i32>`</span>
@@ -298,8 +295,7 @@ Listing 15-8 defines a `MyBox<T>` type in the same way. We’ll also define a
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct MyBox&lt;T&gt;(T);
 
@@ -308,8 +304,7 @@ impl&lt;T&gt; MyBox&lt;T&gt; {
         MyBox(x)
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 15-8: Defining a `MyBox<T>` type</span>
 -->
@@ -341,8 +336,7 @@ code in Listing 15-9 won’t compile because Rust doesn’t know how to derefere
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 15-9: Attempting to use `MyBox<T>` in the same
 way we used references and `Box<T>`</span>
@@ -385,8 +379,7 @@ contains an implementation of `Deref` to add to the definition of `MyBox`:
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::ops::Deref;
 
@@ -398,8 +391,7 @@ contains an implementation of `Deref` to add to the definition of `MyBox`:
         &amp;self.0
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 15-10: Implementing `Deref` on `MyBox<T>`</span>
 -->
@@ -432,8 +424,7 @@ When we entered `*y` in Listing 15-9, behind the scenes Rust actually ran this
 code:
 -->
 <p>リスト15-9に<code>*y</code>を入力した時、水面下でRustは実際にはこのようなコードを走らせていました。</p>
-<pre><code class="language-rust ignore">*(y.deref())
-</code></pre>
+<pre><code class="language-rust ignore">*(y.deref())</code></pre>
 <!--
 Rust substitutes the `*` operator with a call to the `deref` method and then a
 plain dereference so we don’t have to think about whether or not we need to
@@ -506,14 +497,12 @@ parameter:
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn hello(name: &amp;str) {
     println!(&quot;Hello, {}!&quot;, name);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 15-11: A `hello` function that has the parameter
 `name` of type `&str`</span>
@@ -555,8 +544,7 @@ with a reference to a value of type `MyBox<String>`, as shown in Listing 15-12:
 </span>fn main() {
     let m = MyBox::new(String::from(&quot;Rust&quot;));
     hello(&amp;m);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 15-12: Calling `hello` with a reference to a
 `MyBox<String>` value, which works because of deref coercion</span>
@@ -612,8 +600,7 @@ of type `&MyBox<String>`.
 </span>fn main() {
     let m = MyBox::new(String::from(&quot;Rust&quot;));
     hello(&amp;(*m)[..]);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 15-13: The code we would have to write if Rust
 didn’t have deref coercion</span>
@@ -728,21 +715,21 @@ an immutable reference to a mutable reference is possible.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

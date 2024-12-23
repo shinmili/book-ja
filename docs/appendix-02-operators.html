@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -229,7 +228,7 @@ overload that operator is listed.
 | <code>\|\|</code> | <code>expr \|\| expr</code> | Logical OR | |
 | `?` | `expr?` | Error propagation | |
 -->
-<table><thead><tr><th>演算子</th><th>例</th><th>説明</th><th>オーバーロードできる？</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>演算子</th><th>例</th><th>説明</th><th>オーバーロードできる？</th></tr></thead><tbody>
 <tr><td><code>!</code></td><td><code>ident!(...)</code>, <code>ident!{...}</code>, <code>ident![...]</code></td><td>マクロ展開</td><td></td></tr>
 <tr><td><code>!</code></td><td><code>!expr</code></td><td>ビット反転、または論理反転</td><td><code>Not</code></td></tr>
 <tr><td><code>!=</code></td><td><code>var != expr</code></td><td>非等価比較</td><td><code>PartialEq</code></td></tr>
@@ -285,7 +284,7 @@ overload that operator is listed.
 <tr><td><code>||</code></td><td><code>expr || expr</code></td><td>論理OR</td><td></td></tr>
 <tr><td><code>?</code></td><td><code>expr?</code></td><td>エラー委譲</td><td></td></tr>
 </tbody></table>
-<!--
+</div><!--
 ### Non-operator Symbols
 -->
 <h3 id="演算子以外のシンボル"><a class="header" href="#演算子以外のシンボル">演算子以外のシンボル</a></h3>
@@ -319,7 +318,7 @@ locations.
 | `!` | Always empty bottom type for diverging functions |
 | `_` | “Ignored” pattern binding; also used to make integer literals readable |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>'ident</code></td><td>名前付きのライフタイム、あるいはループラベル</td></tr>
 <tr><td><code>...u8</code>, <code>...i32</code>, <code>...f64</code>, <code>...usize</code>など</td><td>特定の型の数値リテラル</td></tr>
 <tr><td><code>&quot;...&quot;</code></td><td>文字列リテラル</td></tr>
@@ -332,7 +331,7 @@ locations.
 <tr><td><code>!</code></td><td>常に発散関数の空のボトム型</td></tr>
 <tr><td><code>_</code></td><td>「無視」パターン束縛: 整数リテラルを見やすくするのにも使われる</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-3 shows symbols that appear in the context of a path through the module
 hierarchy to an item.
 -->
@@ -354,7 +353,7 @@ hierarchy to an item.
 | `type::method(...)` | Disambiguating a method call by naming the type for which it’s defined |
 | `<type as trait>::method(...)` | Disambiguating a method call by naming the trait and type |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>ident::ident</code></td><td>名前空間パス</td></tr>
 <tr><td><code>::path</code></td><td>クレートルートに相対的なパス(すなわち、明示的な絶対パス)</td></tr>
 <tr><td><code>self::path</code></td><td>現在のモジュールに相対的なパス(すなわち、明示的な相対パス)</td></tr>
@@ -365,7 +364,7 @@ hierarchy to an item.
 <tr><td><code>type::method(...)</code></td><td>定義されている型を名指ししてメソッド呼び出しを明確化する</td></tr>
 <tr><td><code>&lt;type as trait&gt;::method(...)</code></td><td>トレイト<em>と</em>型を名指ししてメソッド呼び出しを明確化する</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-4 shows symbols that appear in the context of using generic type
 parameters.
 -->
@@ -386,7 +385,7 @@ parameters.
 | `for<...> type` | Higher-ranked lifetime bounds |
 | `type<ident=type>` | A generic type where one or more associated types have specific assignments (e.g., `Iterator<Item=T>`) |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>path&lt;...&gt;</code></td><td>型の内部のジェネリック型への引数を指定する(例、<code>Vec&lt;u8&gt;</code>)</td></tr>
 <tr><td><code>path::&lt;...&gt;</code>, <code>method::&lt;...&gt;</code></td><td>式中のジェネリックな型、関数、メソッドへの引数を指定する。しばしばターボ・フィッシュ(turbofish)と称される。(例、<code>&quot;42&quot;.parse::&lt;i32&gt;()</code>)</td></tr>
 <tr><td><code>fn ident&lt;...&gt; ...</code></td><td>ジェネリックな関数を定義する</td></tr>
@@ -396,7 +395,7 @@ parameters.
 <tr><td><code>for&lt;...&gt; type</code></td><td>高階ライフタイム境界</td></tr>
 <tr><td><code>type&lt;ident=type&gt;</code></td><td>1つ以上の関連型に代入されたジェネリックな型(例、<code>Iterator&lt;Item=T&gt;</code>)</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-5 shows symbols that appear in the context of constraining generic type
 parameters with trait bounds.
 -->
@@ -415,7 +414,7 @@ parameters with trait bounds.
 | `T: ?Sized` | Allow generic type parameter to be a dynamically sized type |
 | `'a + trait`, `trait + trait` | Compound type constraint |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>T: U</code></td><td><code>U</code>を実装する型に制約されるジェネリック引数<code>T</code></td></tr>
 <tr><td><code>T: 'a</code></td><td>ライフタイム<code>'a</code>よりも長生きしなければならないジェネリック型<code>T</code>(型がライフタイムより長生きするとは、<code>'a</code>よりも短いライフタイムの参照を何も遷移的に含められないことを意味する)</td></tr>
 <tr><td><code>T : 'static</code></td><td>ジェネリック型<code>T</code>が<code>'static</code>なもの以外の借用された参照を何も含まない</td></tr>
@@ -423,7 +422,7 @@ parameters with trait bounds.
 <tr><td><code>T: ?Sized</code></td><td>ジェネリック型引数が動的サイズ決定型であることを許容する</td></tr>
 <tr><td><code>'a + trait</code>, <code>trait + trait</code></td><td>複合型制約</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-6 shows symbols that appear in the context of calling or defining
 macros and specifying attributes on an item.
 -->
@@ -441,14 +440,14 @@ macros and specifying attributes on an item.
 | `$ident:kind` | Macro capture |
 | `$(…)…` | Macro repetition |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>#[meta]</code></td><td>外部属性</td></tr>
 <tr><td><code>#![meta]</code></td><td>内部属性</td></tr>
 <tr><td><code>$ident</code></td><td>マクロ代用</td></tr>
 <tr><td><code>$ident:kind</code></td><td>マクロキャプチャ</td></tr>
 <tr><td><code>$(…)…</code></td><td>マクロの繰り返し</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-7 shows symbols that create comments.
 -->
 <p>表B-7は、コメントを生成する記号を示しています。</p>
@@ -466,7 +465,7 @@ Table B-7 shows symbols that create comments.
 | `/*!...*/` | Inner block doc comment |
 | `/**...*/` | Outer block doc comment |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>//</code></td><td>行コメント</td></tr>
 <tr><td><code>//!</code></td><td>内部行docコメント</td></tr>
 <tr><td><code>///</code></td><td>外部行docコメント</td></tr>
@@ -474,7 +473,7 @@ Table B-7 shows symbols that create comments.
 <tr><td><code>/*!...*/</code></td><td>内部ブロックdocコメント</td></tr>
 <tr><td><code>/**...*/</code></td><td>外部ブロックdocコメント</td></tr>
 </tbody></table>
-<!--
+</div><!--
 #### Tuples
 -->
 <h4 id="タプル"><a class="header" href="#タプル">タプル</a></h4>
@@ -499,7 +498,7 @@ Table B-8 shows symbols that appear in the context of using tuples.
 | `ident!(...)`, `ident!{...}`, `ident![...]` | Macro invocation |
 | `expr.0`, `expr.1`, etc. | Tuple indexing |
 -->
-<table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>シンボル</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>()</code></td><td>空のタプル (ユニットとしても知られる)、リテラル、型両方</td></tr>
 <tr><td><code>(expr)</code></td><td>括弧付きの式</td></tr>
 <tr><td><code>(expr,)</code></td><td>1要素タプル式</td></tr>
@@ -510,7 +509,7 @@ Table B-8 shows symbols that appear in the context of using tuples.
 <tr><td><code>ident!(...)</code>, <code>ident!{...}</code>, <code>ident![...]</code></td><td>マクロ呼び出し</td></tr>
 <tr><td><code>expr.0</code>, <code>expr.1</code>, など</td><td>タプル添え字アクセス</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-9 shows the contexts in which curly braces are used.
 -->
 <p>表B-9は、波括弧が使用される文脈を表示しています。</p>
@@ -524,11 +523,11 @@ Table B-9 shows the contexts in which curly braces are used.
 | `{...}` | Block expression |
 | `Type {...}` | `struct` literal |
 -->
-<table><thead><tr><th>文脈</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>文脈</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>{...}</code></td><td>ブロック式</td></tr>
 <tr><td><code>Type {...}</code></td><td><code>struct</code>リテラル</td></tr>
 </tbody></table>
-<!--
+</div><!--
 Table B-10 shows the contexts in which square brackets are used.
 -->
 <p>表B-10は、角括弧が使用される文脈を表示しています。</p>
@@ -545,14 +544,14 @@ Table B-10 shows the contexts in which square brackets are used.
 | `expr[expr]` | Collection indexing. Overloadable (`Index`, `IndexMut`) |
 | `expr[..]`, `expr[a..]`, `expr[..b]`, `expr[a..b]` | Collection indexing pretending to be collection slicing, using `Range`, `RangeFrom`, `RangeTo`, or `RangeFull` as the “index” |
 -->
-<table><thead><tr><th>文脈</th><th>説明</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>文脈</th><th>説明</th></tr></thead><tbody>
 <tr><td><code>[...]</code></td><td>配列リテラル</td></tr>
 <tr><td><code>[expr; len]</code></td><td><code>len</code>個<code>expr</code>を含む配列リテラル</td></tr>
 <tr><td><code>[type; len]</code></td><td><code>len</code>個の<code>type</code>のインスタンスを含む配列型</td></tr>
 <tr><td><code>expr[expr]</code></td><td>コレクション添え字アクセス。オーバーロード可能 (<code>Index</code>, <code>IndexMut</code>)</td></tr>
 <tr><td><code>expr[..]</code>, <code>expr[a..]</code>, <code>expr[..b]</code>, <code>expr[a..b]</code></td><td><code>Range</code>、<code>RangeFrom</code>、<code>RangeTo</code>、<code>RangeFull</code>を「添え字」として使用してコレクション・スライシングの振りをするコレクション添え字アクセス</td></tr>
 </tbody></table>
-
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -585,21 +584,21 @@ Table B-10 shows the contexts in which square brackets are used.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

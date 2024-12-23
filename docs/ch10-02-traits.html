@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -200,14 +199,12 @@ need a summary from each type, and we need to request that summary by calling a
 <span class="filename">Filename: src/lib.rs</span>
 -->
 <p><span class="filename">ファイル名: src/lib.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub trait Summary {
     fn summarize(&amp;self) -&gt; String;
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-12: A `Summary` trait that consists of the
 behavior provided by a `summarize` method</span>
@@ -259,8 +256,7 @@ already limited to 280 characters.
 <span class="filename">Filename: src/lib.rs</span>
 -->
 <p><span class="filename">ファイル名: src/lib.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">pub trait Summary {
 </span><span class="boring">    fn summarize(&amp;self) -&gt; String;
@@ -291,8 +287,7 @@ impl Summary for Tweet {
         format!(&quot;{}: {}&quot;, self.username, self.content)
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-13: Implementing the `Summary` trait on the
 `NewsArticle` and `Tweet` types</span>
@@ -332,8 +327,7 @@ After implementing the trait, we can call the methods on instances of
     };
 
     println!(&quot;1 new tweet: {}&quot;, tweet.summarize());
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 This code prints `1 new tweet: horse_ebooks: of course, as you probably already
 know, people`.
@@ -413,8 +407,7 @@ in Listing 10-12.
 <span class="filename">Filename: src/lib.rs</span>
 -->
 <p><span class="filename">ファイル名: src/lib.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub trait Summary {
     fn summarize(&amp;self) -&gt; String {
@@ -444,8 +437,7 @@ in Listing 10-12.
 </span><span class="boring">        format!(&quot;{}: {}&quot;, self.username, self.content)
 </span><span class="boring">    }
 </span><span class="boring">}
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-14: Definition of a `Summary` trait with a
 default implementation of the `summarize` method</span>
@@ -486,8 +478,7 @@ the `summarize` method on an instance of `NewsArticle`, like this:
     };
 
     println!(&quot;New article available! {}&quot;, article.summarize());
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 This code prints `New article available! (Read more...)`.
 -->
@@ -514,8 +505,7 @@ a small part of it. For example, we could define the `Summary` trait to have a
 このようにすれば、トレイトは多くの有用な機能を提供しつつ、実装者は僅かな部分しか指定しなくて済むようになります。
 例えば、<code>Summary</code>トレイトを、（実装者が）内容を実装しなければならない<code>summarize_author</code>メソッドを持つように定義し、
 それから<code>summarize_author</code>メソッドを呼び出すデフォルト実装を持つ<code>summarize</code>メソッドを定義することもできます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub trait Summary {
     fn summarize_author(&amp;self) -&gt; String;
@@ -538,8 +528,7 @@ a small part of it. For example, we could define the `Summary` trait to have a
 </span><span class="boring">        format!(&quot;@{}&quot;, self.username)
 </span><span class="boring">    }
 </span><span class="boring">}
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <!--
 To use this version of `Summary`, we only need to define `summarize_author`
 when we implement the trait on a type:
@@ -565,8 +554,7 @@ when we implement the trait on a type:
     fn summarize_author(&amp;self) -&gt; String {
         format!(&quot;@{}&quot;, self.username)
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 After we define `summarize_author`, we can call `summarize` on instances of the
 `Tweet` struct, and the default implementation of `summarize` will call the
@@ -591,8 +579,7 @@ definition of `summarize_author` that we’ve provided. Because we’ve implemen
     };
 
     println!(&quot;1 new tweet: {}&quot;, tweet.summarize());
-<span class="boring">}
-</span></code></pre>
+<span class="boring">}</span></code></pre>
 <!--
 This code prints `1 new tweet: (Read more from @horse_ebooks...)`.
 -->
@@ -653,8 +640,7 @@ syntax, like this:
 </span><span class="boring">
 </span>pub fn notify(item: &amp;impl Summary) {
     println!(&quot;Breaking news! {}&quot;, item.summarize());
-}
-</code></pre>
+}</code></pre>
 <!--
 Instead of a concrete type for the `item` parameter, we specify the `impl`
 keyword and the trait name. This parameter accepts any type that implements the
@@ -684,8 +670,7 @@ this:
 <pre><code class="language-rust ignore">pub fn notify&lt;T: Summary&gt;(item: &amp;T) {
 	// 速報！ {}
     println!(&quot;Breaking news! {}&quot;, item.summarize());
-}
-</code></pre>
+}</code></pre>
 <!--
 This longer form is equivalent to the example in the previous section but is
 more verbose. We place trait bounds with the declaration of the generic type
@@ -703,8 +688,7 @@ Trait` syntax looks like this:
 そうでないケースの場合、トレイト境界構文を使えば複雑な状態を表現できます。
 たとえば、<code>Summary</code>を実装する2つのパラメータを持つような関数を考えることができます。
 <code>impl Trait</code>構文を使うとこのようになるでしょう：</p>
-<pre><code class="language-rust ignore">pub fn notify(item1: &amp;impl Summary, item2: &amp;impl Summary) {
-</code></pre>
+<pre><code class="language-rust ignore">pub fn notify(item1: &amp;impl Summary, item2: &amp;impl Summary) {</code></pre>
 <!--
 If we wanted this function to allow `item1` and `item2` to have different
 types, using `impl Trait` would be appropriate (as long as both types implement
@@ -713,8 +697,7 @@ only possible to express using a trait bound, like this:
 -->
 <p>この関数が受け取る<code>item1</code>と<code>item2</code>の型が（どちらも<code>Summary</code>を実装する限り）異なっても良いとするならば、<code>impl Trait</code>は適切でしょう。
 両方の引数が同じ型であることを強制することは、以下のようにトレイト境界を使ってのみ表現可能です：</p>
-<pre><code class="language-rust ignore">pub fn notify&lt;T: Summary&gt;(item1: &amp;T, item2: &amp;T) {
-</code></pre>
+<pre><code class="language-rust ignore">pub fn notify&lt;T: Summary&gt;(item1: &amp;T, item2: &amp;T) {</code></pre>
 <!--
 The generic type `T` specified as the type of the `item1` and `item2`
 parameters constrains the function such that the concrete type of the value
@@ -736,14 +719,12 @@ the `notify` definition that `item` must implement both `Display` and
 たとえば、<code>notify</code>に<code>summarize</code>メソッドに加えて<code>item</code>の画面出力形式（ディスプレイフォーマット）を使わせたいとします。
 その場合は、<code>notify</code>の定義に<code>item</code>は<code>Display</code>と<code>Summary</code>の両方を実装していなくてはならないと指定することになります。
 これは、以下のように<code>+</code>構文で行うことができます：</p>
-<pre><code class="language-rust ignore">pub fn notify(item: &amp;(impl Summary + Display)) {
-</code></pre>
+<pre><code class="language-rust ignore">pub fn notify(item: &amp;(impl Summary + Display)) {</code></pre>
 <!--
 The `+` syntax is also valid with trait bounds on generic types:
 -->
 <p><code>+</code>構文はジェネリック型につけたトレイト境界に対しても使えます：</p>
-<pre><code class="language-rust ignore">pub fn notify&lt;T: Summary + Display&gt;(item: &amp;T) {
-</code></pre>
+<pre><code class="language-rust ignore">pub fn notify&lt;T: Summary + Display&gt;(item: &amp;T) {</code></pre>
 <!--
 With the two trait bounds specified, the body of `notify` can call `summarize`
 and use `{}` to format `item`.
@@ -766,8 +747,7 @@ signature. So instead of writing this:
 これでは関数のシグネチャが読みにくくなってしまいます。
 このため、Rustはトレイト境界を関数シグネチャの後の<code>where</code>句の中で指定するという別の構文を用意しています。
 なので、このように書く：</p>
-<pre><code class="language-rust ignore">fn some_function&lt;T: Display + Clone, U: Clone + Debug&gt;(t: &amp;T, u: &amp;U) -&gt; i32 {
-</code></pre>
+<pre><code class="language-rust ignore">fn some_function&lt;T: Display + Clone, U: Clone + Debug&gt;(t: &amp;T, u: &amp;U) -&gt; i32 {</code></pre>
 <!--
 we can use a `where` clause, like this:
 -->
@@ -775,8 +755,7 @@ we can use a `where` clause, like this:
 <pre><code class="language-rust ignore">fn some_function&lt;T, U&gt;(t: &amp;T, u: &amp;U) -&gt; i32
     where T: Display + Clone,
           U: Clone + Debug
-{
-</code></pre>
+{</code></pre>
 <!--
 This function’s signature is less cluttered: the function name, parameter list,
 and return type are close together, similar to a function without lots of trait
@@ -831,8 +810,7 @@ value of some type that implements a trait, as shown here:
         reply: false,
         retweet: false,
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 By using `impl Summary` for the return type, we specify that the
 `returns_summarizable` function returns some type that implements the `Summary`
@@ -912,8 +890,7 @@ return type specified as `impl Summary` wouldn’t work:
             retweet: false,
         }
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 Returning either a `NewsArticle` or a `Tweet` isn’t allowed due to restrictions
 around how the `impl Trait` syntax is implemented in the compiler. We’ll cover
@@ -991,8 +968,7 @@ look like this:
 </span><span class="boring">
 </span><span class="boring">    let result = largest(&amp;char_list);
 </span><span class="boring">    println!(&quot;The largest char is {}&quot;, result);
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <!--
 This time when we compile the code, we get a different set of errors:
 -->
@@ -1088,8 +1064,7 @@ fn main() {
 
     let result = largest(&amp;char_list);
     println!(&quot;The largest char is {}&quot;, result);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 10-15: A working definition of the `largest`
 function that works on any generic type that implements the `PartialOrd` and
@@ -1142,8 +1117,7 @@ the `Display` trait that enables printing.
 <span class="filename">Filename: src/lib.rs</span>
 -->
 <p><span class="filename">ファイル名: src/lib.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::fmt::Display;
 
@@ -1167,8 +1141,7 @@ impl&lt;T: Display + PartialOrd&gt; Pair&lt;T&gt; {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 10-16: Conditionally implement methods on a
 generic type depending on trait bounds</span>
@@ -1189,8 +1162,7 @@ Rustの標準ライブラリで広く使用されています。例を挙げれ�
 標準ライブラリの<code>impl</code>ブロックは以下のような見た目です:</p>
 <pre><code class="language-rust ignore">impl&lt;T: Display&gt; ToString for T {
     // --snip--
-}
-</code></pre>
+}</code></pre>
 <!--
 Because the standard library has this blanket implementation, we can call the
 `to_string` method defined by the `ToString` trait on any type that implements
@@ -1200,12 +1172,10 @@ the `Display` trait. For example, we can turn integers into their corresponding
 <p>標準ライブラリにはこのブランケット実装があるので、<code>Display</code>トレイトを実装する任意の型に対して、
 <code>ToString</code>トレイトで定義された<code>to_string</code>メソッドを呼び出せるのです。
 例えば、整数は<code>Display</code>を実装するので、このように整数値を対応する<code>String</code>値に変換できます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let s = 3.to_string();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 Blanket implementations appear in the documentation for the trait in the
 “Implementors” section.
@@ -1279,21 +1249,21 @@ ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-differen
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

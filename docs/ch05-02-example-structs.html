@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -182,8 +181,7 @@ exactly that in our project’s *src/main.rs*.
 
 fn area(width: u32, height: u32) -&gt; u32 {
     width * height
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 5-8: Calculating the area of a rectangle
 specified by separate width and height variables</span>
@@ -212,8 +210,7 @@ rectangle.
 The issue with this code is evident in the signature of `area`:
 -->
 <p>このコードの問題点は、<code>area</code>のシグニチャから明らかです:</p>
-<pre><code class="language-rust ignore">fn area(width: u32, height: u32) -&gt; u32 {
-</code></pre>
+<pre><code class="language-rust ignore">fn area(width: u32, height: u32) -&gt; u32 {</code></pre>
 <!--
 The `area` function is supposed to calculate the area of one rectangle, but the
 function we wrote has two parameters. The parameters are related, but that’s
@@ -248,8 +245,7 @@ Listing 5-9 shows another version of our program that uses tuples.
 
 fn area(dimensions: (u32, u32)) -&gt; u32 {
     dimensions.0 * dimensions.1
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 5-9: Specifying the width and height of the
 rectangle with a tuple</span>
@@ -309,8 +305,7 @@ fn main() {
 
 fn area(rectangle: &amp;Rectangle) -&gt; u32 {
     rectangle.width * rectangle.height
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 5-10: Defining a `Rectangle` struct</span>
 -->
@@ -373,8 +368,7 @@ fn main() {
 
     // rect1は{}です
     println!(&quot;rect1 is {}&quot;, rect1);
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 5-11: Attempting to print a `Rectangle`
 instance</span>
@@ -464,8 +458,7 @@ fn main() {
     let rect1 = Rectangle { width: 30, height: 50 };
 
     println!(&quot;rect1 is {:?}&quot;, rect1);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 5-12: Adding the annotation to derive the `Debug`
 trait and printing the `Rectangle` instance using debug formatting</span>
@@ -548,21 +541,21 @@ continue to refactor this code by turning the `area` function into an `area`
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

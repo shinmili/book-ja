@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -165,8 +164,7 @@ As you saw in Chapter 6, you can match patterns against literals directly. The
 following code gives some examples:
 -->
 <p>第6章で目撃したように、パターンを直接リテラルに合致させられます。以下のコードが例を挙げています:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 1;
 
@@ -176,8 +174,7 @@ match x {
     3 =&gt; println!(&quot;three&quot;),     // 3
     _ =&gt; println!(&quot;anything&quot;),  // なんでも
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code prints `one` because the value in `x` is 1. This syntax is useful
 when you want your code to take an action if it gets a particular concrete
@@ -224,8 +221,7 @@ running this code or reading further.
 
     // 最後にはx = {}, y = {}
     println!(&quot;at the end: x = {:?}, y = {:?}&quot;, x, y);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-11: A `match` expression with an arm that
 introduces a shadowed variable `y`</span>
@@ -291,8 +287,7 @@ run:
 -->
 <p><code>match</code>式で<code>|</code>記法で複数のパターンに合致させることができ、これは<em>or</em>を意味します。例えば、以下のコードは<code>x</code>の値をマッチアームに合致させ、
 最初のマッチアームには<em>or</em>選択肢があり、<code>x</code>の値がそのアームのどちらかの値に合致したら、そのアームのコードが走ることを意味します:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 1;
 
@@ -304,8 +299,7 @@ match x {
     // なんでも
     _ =&gt; println!(&quot;anything&quot;),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code prints `one or two`.
 -->
@@ -321,8 +315,7 @@ arm will execute:
 -->
 <p><code>..=</code>記法により、限度値を含む値の範囲にマッチさせることができます。以下のコードでは、
 パターンが範囲内のどれかの値に合致すると、そのアームが実行されます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 5;
 
@@ -332,8 +325,7 @@ match x {
     // それ以外
     _ =&gt; println!(&quot;something else&quot;),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 If `x` is 1, 2, 3, 4, or 5, the first arm will match. This syntax is more
 convenient than using the `|` operator to express the same idea; instead of `1..=5`,
@@ -355,8 +347,7 @@ which Rust can tell if a range is empty or not are `char` and numeric values.
 Here is an example using ranges of `char` values:
 -->
 <p>こちらは、<code>char</code>値の範囲を使用する例です:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 'c';
 
@@ -368,8 +359,7 @@ match x {
     // それ以外
     _ =&gt; println!(&quot;something else&quot;),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 Rust can tell that `'c'` is within the first pattern’s range and prints `early
 ASCII letter`.
@@ -409,8 +399,7 @@ fn main() {
     let Point { x: a, y: b } = p;
     assert_eq!(0, a);
     assert_eq!(7, b);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-12: Destructuring a struct’s fields into
 separate variables</span>
@@ -454,8 +443,7 @@ fn main() {
     let Point { x, y } = p;
     assert_eq!(0, x);
     assert_eq!(7, y);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-13: Destructuring struct fields using struct
 field shorthand</span>
@@ -503,8 +491,7 @@ three cases: points that lie directly on the `x` axis (which is true when `y =
         // どちらの軸上でもない: ({}, {})
         Point { x, y } =&gt; println!(&quot;On neither axis: ({}, {})&quot;, x, y),
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-14: Destructuring and matching literal values
 in one pattern</span>
@@ -585,8 +572,7 @@ fn main() {
             )
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-15: Destructuring enum variants that hold
 different kinds of values</span>
@@ -649,8 +635,7 @@ calculations on the `x` and `y` values easily.
 -->
 <p>リスト18-16の例は、ベクタの<code>Point</code>インスタンスへの参照を走査し、<code>x</code>と<code>y</code>値に簡単に計算を行えるように、
 参照と構造体を分配します。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">struct Point {
 </span><span class="boring">    x: i32,
@@ -667,8 +652,7 @@ let sum_of_squares: i32 = points
     .iter()
     .map(|&amp;Point { x, y }| x * x + y * y)
     .sum();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-16: Destructuring a reference to a struct into
 the struct field values</span>
@@ -715,8 +699,7 @@ tuples inside a tuple and destructure all the primitive values out:
 -->
 <p>分配パターンをさらに複雑な方法で混ぜてマッチさせ、ネストすることができます。以下の例は、
 構造体とタプルをタプルにネストし、全ての基本的な値を取り出している複雑な分配を表示しています:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">struct Point {
 </span><span class="boring">    x: i32,
@@ -724,8 +707,7 @@ tuples inside a tuple and destructure all the primitive values out:
 </span><span class="boring">}
 </span><span class="boring">
 </span>let ((feet, inches), Point {x, y}) = ((3, 10), Point { x: 3, y: -10 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code lets us break complex types into their component parts so we can use
 the values we’re interested in separately.
@@ -778,8 +760,7 @@ including function parameters, as shown in Listing 18-17.
 
 fn main() {
     foo(3, 4);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-17: Using `_` in a function signature</span>
 -->
@@ -820,8 +801,7 @@ currently unset.
 リスト18-18は、設定の値を管理する責任を負ったコードを示しています。業務要件は、
 ユーザが既存の設定の変更を上書きすることはできないべきだけれども、設定を解除し、
 現在設定がされていなければ設定に値を与えられるというものです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut setting_value = Some(5);
 let new_setting_value = Some(10);
@@ -838,8 +818,7 @@ match (setting_value, new_setting_value) {
 
 // 設定は{:?}です
 println!(&quot;setting is {:?}&quot;, setting_value);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-18: Using an underscore within patterns that
 match `Some` variants when we don’t need to use the value inside the
@@ -872,8 +851,7 @@ fourth values in a tuple of five items.
 -->
 <p>また、1つのパターンの複数箇所でアンダースコアを使用して特定の値を無視することもできます。
 リスト18-19は、5要素のタプルで2番目と4番目の値を無視する例です。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let numbers = (2, 4, 8, 16, 32);
 
@@ -883,8 +861,7 @@ match numbers {
         println!(&quot;Some numbers: {}, {}, {}&quot;, first, third, fifth)
     },
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-19: Ignoring multiple parts of a tuple</span>
 -->
@@ -919,8 +896,7 @@ only get a warning about one of them.
 <pre><pre class="playground"><code class="language-rust">fn main() {
     let _x = 5;
     let y = 10;
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-20: Starting a variable name with an
 underscore to avoid getting unused variable warnings</span>
@@ -949,8 +925,7 @@ if let Some(_s) = s {
     println!(&quot;found a string&quot;);
 }
 
-println!(&quot;{:?}&quot;, s);
-</code></pre>
+println!(&quot;{:?}&quot;, s);</code></pre>
 <!--
 <span class="caption">Listing 18-21: An unused variable starting with an
 underscore still binds the value, which might take ownership of the value</span>
@@ -965,8 +940,7 @@ because `s` doesn’t get moved into `_`.
 <p>それでも<code>s</code>値は<code>_s</code>にムーブされ、再度<code>s</code>を使用できなくするので、エラーを受け取るでしょう。ですが、
 アンダースコアを単独で使用すれば、値を束縛することは全くありません。
 <code>s</code>が<code>_</code>にムーブされないので、リスト18-22はエラーなくコンパイルできます。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let s = Some(String::from(&quot;Hello!&quot;));
 
@@ -975,8 +949,7 @@ if let Some(_) = s {
 }
 
 println!(&quot;{:?}&quot;, s);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-22: Using an underscore does not bind the
 value</span>
@@ -1004,8 +977,7 @@ the values in the `y` and `z` fields.
 パターンの残りで明示的にマッチさせていない値のどんな部分も無視します。リスト18-23では、
 3次元空間で座標を保持する<code>Point</code>構造体があります。<code>match</code>式で<code>x</code>座標のみ処理し、
 <code>y</code>と<code>z</code>フィールドの値は無視したいです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct Point {
     x: i32,
@@ -1018,8 +990,7 @@ let origin = Point { x: 0, y: 0, z: 0 };
 match origin {
     Point { x, .. } =&gt; println!(&quot;x is {}&quot;, x),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-23: Ignoring all fields of a `Point` except
 for `x` by using `..`</span>
@@ -1050,8 +1021,7 @@ shows how to use `..` with a tuple.
             println!(&quot;Some numbers: {}, {}&quot;, first, last);
         },
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-24: Matching only the first and last values in
 a tuple and ignoring all other values</span>
@@ -1083,8 +1053,7 @@ compile.
             println!(&quot;Some numbers: {}&quot;, second)
         },
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 18-25: An attempt to use `..` in an ambiguous
 way</span>
@@ -1145,8 +1114,7 @@ match robot_name {
 }
 
 // robot_nameは: {:?}
-println!(&quot;robot_name is: {:?}&quot;, robot_name);
-</code></pre>
+println!(&quot;robot_name is: {:?}&quot;, robot_name);</code></pre>
 <!--
 <span class="caption">Listing 18-26: Creating a variable in a `match` arm
 pattern takes ownership of the value</span>
@@ -1182,8 +1150,7 @@ Instead, to create a reference in a pattern, we use the `ref` keyword before
 the new variable, as shown in Listing 18-27.
 -->
 <p>その代わりに、パターンで参照を生成するには、リスト18-27のように、新しい変数の前に<code>ref</code>キーワードを使用します。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let robot_name = Some(String::from(&quot;Bors&quot;));
 
@@ -1193,8 +1160,7 @@ match robot_name {
 }
 
 println!(&quot;robot_name is: {:?}&quot;, robot_name);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-27: Creating a reference so a pattern variable
 does not take ownership of a value</span>
@@ -1217,8 +1183,7 @@ reference.
 <p>パターンで合致した値を可変化できるように可変参照を生成するには、<code>&amp;mut</code>の代わりに<code>ref mut</code>を使用します。
 理由は今度も、パターンにおいて、前者は既存の可変参照にマッチするためにあり、新しい参照を生成しないからです。
 リスト18-28は、可変参照を生成するパターンの例です。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut robot_name = Some(String::from(&quot;Bors&quot;));
 
@@ -1229,8 +1194,7 @@ match robot_name {
 }
 
 println!(&quot;robot_name is: {:?}&quot;, robot_name);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-28: Creating a mutable reference to a value as
 part of a pattern using `ref mut`</span>
@@ -1263,8 +1227,7 @@ guard of `if x < 5`.
 -->
 <p>この条件は、パターンで生成された変数を使用できます。リスト18-29は、
 最初のアームにパターン<code>Some(x)</code>と<code>if x &lt; 5</code>というマッチガードもある<code>match</code>を示しています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let num = Some(4);
 
@@ -1274,8 +1237,7 @@ match num {
     Some(x) =&gt; println!(&quot;{}&quot;, x),
     None =&gt; (),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-29: Adding a match guard to a pattern</span>
 -->
@@ -1331,8 +1293,7 @@ problem.
     }
 
     println!(&quot;at the end: x = {:?}, y = {:?}&quot;, x, y);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 18-30: Using a match guard to test for equality
 with an outer variable</span>
@@ -1371,8 +1332,7 @@ to `4`, `5`, *and* `6`, even though it might look like `if y` only applies to
 マッチガードの条件は全てのパターンに適用されます。リスト18-31は、
 <code>|</code>を使用するパターンとマッチガードを組み合わせる優先度を示しています。この例で重要な部分は、
 <code>if y</code>は<code>6</code>にしか適用されないように見えるのに、<code>if y</code>マッチガードが<code>4</code>、<code>5</code>、<em>そして</em><code>6</code>に適用されることです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 4;
 let y = false;
@@ -1383,8 +1343,7 @@ match x {
     // いいえ
     _ =&gt; println!(&quot;no&quot;),
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-31: Combining multiple patterns with a match
 guard</span>
@@ -1438,8 +1397,7 @@ a different name.
 リスト18-32は、<code>Message::Hello</code>の<code>id</code>フィールドが範囲<code>3..=7</code>にあるかを確かめたいという例です。
 しかし、アームに紐づいたコードで使用できるように変数<code>id_variable</code>に値を束縛もしたいです。この変数をフィールドと同じ、
 <code>id</code>と名付けることもできますが、この例では異なる名前にします。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>enum Message {
     Hello { id: i32 },
@@ -1461,8 +1419,7 @@ match msg {
         println!(&quot;Found some other id: {}&quot;, id)
     },
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 18-32: Using `@` to bind to a value in a pattern
 while also testing it</span>
@@ -1555,21 +1512,21 @@ aspects of a variety of Rust’s features.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

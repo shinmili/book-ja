@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -196,8 +195,7 @@ fn main() {
         &quot;The area of the rectangle is {} square pixels.&quot;,
         rect1.area()
     );
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 5-13: Defining an `area` method on the
 `Rectangle` struct</span>
@@ -318,8 +316,7 @@ making ownership ergonomic in practice.
 <p>動作方法はこうです: <code>object.something()</code>とメソッドを呼び出すと、
 コンパイラは<code>object</code>がメソッドのシグニチャと合致するように、自動で<code>&amp;</code>か<code>&amp;mut</code>、<code>*</code>を付与するのです。
 要するに、以下のコードは同じものです:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">#[derive(Debug,Copy,Clone)]
 </span><span class="boring">struct Point {
@@ -339,8 +336,7 @@ making ownership ergonomic in practice.
 </span><span class="boring">let p2 = Point { x: 5.0, y: 6.5 };
 </span>p1.distance(&amp;p2);
 (&amp;p1).distance(&amp;p2);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>前者の方がずっと明確です。メソッドには自明な受け手(<code>self</code>の型)がいるので、この自動参照機能は動作するのです。
 受け手とメソッド名が与えられれば、コンパイラは確実にメソッドが読み込み専用(<code>&amp;self</code>)か、書き込みもする(<code>&amp;mut self</code>)のか、
 所有権を奪う(<code>self</code>)のか判断できるわけです。メソッドの受け手に関して借用が明示されないというのが、
@@ -374,8 +370,7 @@ method.
     // rect1にrect2ははまり込む？
     println!(&quot;Can rect1 hold rect2? {}&quot;, rect1.can_hold(&amp;rect2));
     println!(&quot;Can rect1 hold rect3? {}&quot;, rect1.can_hold(&amp;rect3));
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 5-14: Using the as-yet-unwritten `can_hold`
 method</span>
@@ -419,8 +414,7 @@ Listing 5-13, shown in Listing 5-15.
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">#[derive(Debug)]
 </span><span class="boring">struct Rectangle {
@@ -437,8 +431,7 @@ Listing 5-13, shown in Listing 5-15.
         self.width &gt; other.width &amp;&amp; self.height &gt; other.height
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 5-15: Implementing the `can_hold` method on
 `Rectangle` that takes another `Rectangle` instance as a parameter</span>
@@ -483,8 +476,7 @@ specify the same value twice:
 <span class="filename">Filename: src/main.rs</span>
 -->
 <p><span class="filename">ファイル名: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">#[derive(Debug)]
 </span><span class="boring">struct Rectangle {
@@ -497,8 +489,7 @@ specify the same value twice:
         Rectangle { width: size, height: size }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 To call this associated function, we use the `::` syntax with the struct name;
 `let sq = Rectangle::square(3);` is an example. This function is namespaced by
@@ -519,8 +510,7 @@ in its own `impl` block.
 -->
 <p>各構造体には、複数の<code>impl</code>ブロックを存在させることができます。例えば、リスト5-15はリスト5-16に示したコードと等価で、
 リスト5-16では、各メソッドごとに<code>impl</code>ブロックを用意しています。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">#[derive(Debug)]
 </span><span class="boring">struct Rectangle {
@@ -539,8 +529,7 @@ impl Rectangle {
         self.width &gt; other.width &amp;&amp; self.height &gt; other.height
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 5-16: Rewriting Listing 5-15 using multiple `impl`
 blocks</span>
@@ -608,21 +597,21 @@ Rust’s enum feature to add another tool to our toolbox.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

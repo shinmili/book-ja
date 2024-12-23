@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -302,8 +301,7 @@ fn parse_config(args: &amp;[String]) -&gt; (&amp;str, &amp;str) {
     let filename = &amp;args[2];
 
     (query, filename)
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 12-5: Extracting a `parse_config` function from
 `main`</span>
@@ -403,8 +401,7 @@ fn parse_config(args: &amp;[String]) -&gt; Config {
     let filename = args[2].clone();
 
     Config { query, filename }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 12-6: Refactoring `parse_config` to return an
 instance of a `Config` struct</span>
@@ -539,8 +536,7 @@ impl Config {
 
         Config { query, filename }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <!--
 <span class="caption">Listing 12-7: Changing `parse_config` into
 `Config::new`</span>
@@ -605,8 +601,7 @@ fn new(args: &amp;[String]) -&gt; Config {
         // 引数の数が足りません
         panic!(&quot;not enough arguments&quot;);
     }
-    // --snip--
-</code></pre>
+    // --snip--</code></pre>
 <!--
 <span class="caption">Listing 12-8: Adding a check for the number of
 arguments</span>
@@ -691,8 +686,7 @@ next listing.
 
         Ok(Config { query, filename })
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 12-9: Returning a `Result` from
 `Config::new`</span>
@@ -754,8 +748,7 @@ fn main() {
         process::exit(1);
     });
 
-    // --snip--
-</code></pre>
+    // --snip--</code></pre>
 <!--
 <span class="caption">Listing 12-10: Exiting with an error code if creating a
 new `Config` fails</span>
@@ -854,8 +847,7 @@ fn run(config: Config) {
     println!(&quot;With text:\n{}&quot;, contents);
 }
 
-// --snip--
-</code></pre>
+// --snip--</code></pre>
 <!--
 <span class="caption">Listing 12-11: Extracting a `run` function containing the
 rest of the program logic</span>
@@ -908,8 +900,7 @@ fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     println!(&quot;With text:\n{}&quot;, contents);
 
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 12-12: Changing the `run` function to return
 `Result`</span>
@@ -1006,8 +997,7 @@ with `Config::new` in Listing 12-10, but with a slight difference:
 
         process::exit(1);
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 We use `if let` rather than `unwrap_or_else` to check whether `run` returns an
 `Err` value and call `process::exit(1)` if it does. The `run` function doesn’t
@@ -1081,8 +1071,7 @@ impl Config {
 
 pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
     // --snip--
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 12-13: Moving `Config` and `run` into
 *src/lib.rs*</span>
@@ -1117,8 +1106,7 @@ fn main() {
     if let Err(e) = minigrep::run(config) {
         // --snip--
     }
-}
-</code></pre>
+}</code></pre>
 <!--
 <span class="caption">Listing 12-14: Bringing the `minigrep` crate into the
 scope of *src/main.rs*</span>
@@ -1183,21 +1171,21 @@ write some tests!
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>

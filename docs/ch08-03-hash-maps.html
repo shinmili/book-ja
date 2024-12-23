@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -37,13 +36,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -102,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -135,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -191,8 +190,7 @@ starts with 50.
 -->
 <p>空のハッシュマップを<code>new</code>で作り、要素を<code>insert</code>で追加することができます。リスト8-20では、
 名前がブルーとイエローの2チームのスコアを追いかけています。ブルーチームは10点から、イエローチームは50点から始まります。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -200,8 +198,7 @@ let mut scores = HashMap::new();
 
 scores.insert(String::from(&quot;Blue&quot;), 10);
 scores.insert(String::from(&quot;Yellow&quot;), 50);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-20: Creating a new hash map and inserting some
 keys and values</span>
@@ -240,8 +237,7 @@ method to turn that vector of tuples into a hash map, as shown in Listing 8-21.
 そこには<code>HashMap</code>も含まれています。例として、チーム名と初期スコアが別々のベクタに含まれていたら、
 <code>zip</code>メソッドを使ってタプルのベクタを作り上げることができ、そこでは「ブルー」は10とペアになるなどします。
 リスト8-21に示したように、それから<code>collect</code>メソッドを使って、そのタプルのベクタをハッシュマップに変換することができるわけです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -249,8 +245,7 @@ let teams  = vec![String::from(&quot;Blue&quot;), String::from(&quot;Yellow&quot
 let initial_scores = vec![10, 50];
 
 let scores: HashMap&lt;_, _&gt; = teams.iter().zip(initial_scores.iter()).collect();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-21: Creating a hash map from a list of teams
 and a list of scores</span>
@@ -278,8 +273,7 @@ the hash map will be the owner of those values, as demonstrated in Listing 8-22.
 <p><code>i32</code>のような<code>Copy</code>トレイトを実装する型について、値はハッシュマップにコピーされます。
 <code>String</code>のような所有権のある値なら、値はムーブされ、リスト8-22でデモされているように、
 ハッシュマップはそれらの値の所有者になるでしょう。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -292,8 +286,7 @@ map.insert(field_name, field_value);
 // see what compiler error you get!
 // field_nameとfield_valueはこの時点で無効になる。試しに使ってみて
 // どんなコンパイルエラーが出るか確認してみて！
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-22: Showing that keys and values are owned by
 the hash map once they’re inserted</span>
@@ -323,8 +316,7 @@ We can get a value out of the hash map by providing its key to the `get`
 method, as shown in Listing 8-23.
 -->
 <p>リスト8-23に示したように、キーを<code>get</code>メソッドに提供することで、ハッシュマップから値を取り出すことができます。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -335,8 +327,7 @@ scores.insert(String::from(&quot;Yellow&quot;), 50);
 
 let team_name = String::from(&quot;Blue&quot;);
 let score = scores.get(&amp;team_name);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-23: Accessing the score for the Blue team
 stored in the hash map</span>
@@ -357,8 +348,7 @@ We can iterate over each key/value pair in a hash map in a similar manner as we
 do with vectors, using a `for` loop:
 -->
 <p>ベクタのように、<code>for</code>ループでハッシュマップのキーと値のペアを走査することができます:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -370,8 +360,7 @@ scores.insert(String::from(&quot;Yellow&quot;), 50);
 for (key, value) in &amp;scores {
     println!(&quot;{}: {}&quot;, key, value);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 This code will print each pair in an arbitrary order:
 -->
@@ -412,8 +401,7 @@ team’s key both times.
 <p>キーと値をハッシュマップに挿入し、同じキーを異なる値で挿入したら、そのキーに紐づけられている値は置換されます。
 リスト8-24のコードは、<code>insert</code>を二度呼んでいるものの、ハッシュマップには一つのキーと値の組しか含まれません。
 なぜなら、ブルーチームキーに対する値を2回とも挿入しているからです。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -423,8 +411,7 @@ scores.insert(String::from(&quot;Blue&quot;), 10);
 scores.insert(String::from(&quot;Blue&quot;), 25);
 
 println!(&quot;{:?}&quot;, scores);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-24: Replacing a value stored with a particular
 key</span>
@@ -454,8 +441,7 @@ Listing 8-25.
 この<code>entry</code>メソッドの戻り値は、<code>Entry</code>と呼ばれるenumであり、これは存在したりしなかったりする可能性のある値を表します。
 イエローチームに対するキーに値が紐づけられているか否か確認したくなったとしましょう。存在しなかったら、
 50という値を挿入したく、ブルーチームに対しても同様です。<code>entry</code>APIを使用すれば、コードはリスト8-25のようになります。</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -466,8 +452,7 @@ scores.entry(String::from(&quot;Yellow&quot;)).or_insert(50);
 scores.entry(String::from(&quot;Blue&quot;)).or_insert(50);
 
 println!(&quot;{:?}&quot;, scores);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-25: Using the `entry` method to only insert if
 the key does not already have a value</span>
@@ -509,8 +494,7 @@ the value 0:
 例えば、リスト8-26は、各単語があるテキストに何回出現するかを数え上げるコードを示しています。
 キーに単語を入れたハッシュマップを使用し、その単語を何回見かけたか追いかけるために値を増やします。
 ある単語を見かけたのが最初だったら、まず0という値を挿入します:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::collections::HashMap;
 
@@ -524,8 +508,7 @@ for word in text.split_whitespace() {
 }
 
 println!(&quot;{:?}&quot;, map);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <!--
 <span class="caption">Listing 8-26: Counting occurrences of words using a hash
 map that stores words and counts</span>
@@ -648,21 +631,21 @@ a perfect time to discuss error handling. We'll do that next!
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
+        <script src="ferris.js"></script>
 
 
     </body>
