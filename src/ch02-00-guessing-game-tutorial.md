@@ -404,17 +404,17 @@ immutable by default. Hence, you need to write `&mut guess` rather than
 thoroughly.)
 -->
 
-<!-- Old heading. Do not remove or links may break. -->
-<!--
-<a id="handling-potential-failure-with-the-result-type"></a>
--->
-
 この`&`は、この引数が*参照*であることを示し、これによりコードの複数の部分が同じデータにアクセスしても、そのデータを何度もメモリにコピーしなくて済みます。
 参照は複雑な機能（訳注：一部のプログラム言語では正しく使うのが難しい機能）ですが、Rustの大きな利点の一つは参照を安全かつ簡単に使用できることです。
 このプログラムを完成させるのに、そのような詳細を知る必要はないでしょう。
 とりあえず知っておいてほしいのは、変数のように参照もデフォルトで不変であることです。
 したがって、`&guess`ではなく`&mut guess`と書いて可変にする必要があります。
 （参照については第4章でより詳しく説明します）
+
+<!-- Old heading. Do not remove or links may break. -->
+<!--
+<a id="handling-potential-failure-with-the-result-type"></a>
+-->
 
 <!--
 ### Handling Potential Failure with `Result`
