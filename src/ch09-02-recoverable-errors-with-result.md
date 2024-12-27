@@ -350,13 +350,13 @@ If we run this code without a *hello.txt* file, we’ll see an error message fro
 the `panic!` call that the `unwrap` method makes:
 -->
 
+このコードを*hello.txt*ファイルなしで走らせたら、`unwrap`メソッドが行う`panic!`呼び出しからのエラーメッセージを目の当たりにするでしょう:
+
 <!-- manual-regeneration
 cd listings/ch09-error-handling/no-listing-04-unwrap
 cargo run
 copy and paste relevant text
 -->
-
-このコードを*hello.txt*ファイルなしで走らせたら、`unwrap`メソッドが行う`panic!`呼び出しからのエラーメッセージを目の当たりにするでしょう:
 
 ```text
 thread 'main' panicked at src/main.rs:4:49:
@@ -393,15 +393,15 @@ will be the parameter that we pass to `expect`, rather than the default
 `panic!` message that `unwrap` uses. Here’s what it looks like:
 -->
 
+`expect`を`unwrap`と同じように使用してます: ファイルハンドルを返したり、`panic!`マクロを呼び出しています。
+`expect`が`panic!`呼び出しで使用するエラーメッセージは、`unwrap`が使用するデフォルトの`panic!`メッセージではなく、
+`expect`に渡した引数になります。以下のようになります:
+
 <!-- manual-regeneration
 cd listings/ch09-error-handling/no-listing-05-expect
 cargo run
 copy and paste relevant text
 -->
-
-`expect`を`unwrap`と同じように使用してます: ファイルハンドルを返したり、`panic!`マクロを呼び出しています。
-`expect`が`panic!`呼び出しで使用するエラーメッセージは、`unwrap`が使用するデフォルトの`panic!`メッセージではなく、
-`expect`に渡した引数になります。以下のようになります:
 
 ```text
 thread 'main' panicked at src/main.rs:5:10:
