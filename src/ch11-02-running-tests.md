@@ -221,7 +221,6 @@ our `add_two` function, as shown in Listing 11-11, and choose which ones to run.
 
 ```rust,noplayground
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-11/src/lib.rs}}
-
 ```
 
 <!--
