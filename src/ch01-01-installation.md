@@ -184,7 +184,7 @@ You should see the version number, commit hash, and commit date for the latest
 stable version that has been released, in the following format:
 -->
 
-バージョンナンバー、コミットハッシュ、最新の安定版がリリースされたコミット日時が以下のフォーマットで表示されるのを目撃するはずです。
+リリース済みの最新の安定版のバージョンナンバー、コミットハッシュ、コミット日が以下の形式で表示されるはずです。
 
 ```text
 rustc x.y.z (abcabcabc yyyy-mm-dd)
