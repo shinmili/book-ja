@@ -313,8 +313,8 @@ build` and then use the whole path to the binary, so most developers use `cargo
 run`.
 -->
 
-`cargo run`を使ったほうが、`cargo build`を忘れずに実行した後バイナリへのパス全体を使わないといけないのと比較して便利なので、
-ほとんどの開発者は`cargo run`を使います。
+`cargo build`を実行してから、バイナリへのパス全体を使って実行する、という手順をいちいち踏むより、
+`cargo run`を使う方が便利なので、ほとんどの開発者は`cargo run`を使います。
 
 <!--
 Notice that this time we didn’t see output indicating that Cargo was compiling
