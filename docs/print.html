@@ -626,23 +626,20 @@ an internet connection for the download.
 -->
 <p>最初の手順は、Rustをインストールすることです。Rustは、Rustのバージョンと関連するツールを管理する、<code>rustup</code>というコマンドラインツールを使用してダウンロードします。ダウンロードには、インターネットへの接続が必要になります。</p>
 <!--
-> Note: If you prefer not to use `rustup` for some reason, please see [the Rust
-> installation page](https://www.rust-lang.org/tools/install) for other options.
+> Note: If you prefer not to use `rustup` for some reason, please see the
+> [Other Rust Installation Methods page][otherinstall] for more options.
 -->
 <blockquote>
-<p>注釈: なんらかの理由で<code>rustup</code>を使用したくない場合、<a href="https://www.rust-lang.org/tools/install/">Rustインストールページ</a>で、
+<p>注釈: なんらかの理由で<code>rustup</code>を使用したくない場合、<a href="https://forge.rust-lang.org/infra/other-installation-methods.html">Other Rust Installation Methods ページ</a>で、
 他の選択肢をご覧になってください。</p>
-</blockquote>
-<blockquote>
-<p>訳注：日本語版のRustインストールページは<a href="https://www.rust-lang.org/ja/tools/install/">こちら</a>です。</p>
 </blockquote>
 <!--
 The following steps install the latest stable version of the Rust compiler.
 Rust’s stability guarantees ensure that all the examples in the book that
 compile will continue to compile with newer Rust versions. The output might
-differ slightly between versions, because Rust often improves error messages
-and warnings. In other words, any newer, stable version of Rust you install
-using these steps should work as expected with the content of this book.
+differ slightly between versions because Rust often improves error messages and
+warnings. In other words, any newer, stable version of Rust you install using
+these steps should work as expected with the content of this book.
 -->
 <p>以下の手順で最新の安定版のRustコンパイラをインストールします。
 Rustは安定性 (stability) を保証しているので、現在この本の例でコンパイルできるものは、新しいバージョンになってもコンパイルでき続けることが保証されます。
@@ -654,15 +651,16 @@ Rustは安定性 (stability) を保証しているので、現在この本の例
 >
 > In this chapter and throughout the book, we’ll show some commands used in the
 > terminal. Lines that you should enter in a terminal all start with `$`. You
-> don’t need to type in the `$` character; it indicates the start of each
-> command. Lines that don’t start with `$` typically show the output of the
-> previous command. Additionally, PowerShell-specific examples will use `>`
-> rather than `$`.
+> don’t need to type the `$` character; it’s the command line prompt shown to
+> indicate the start of each command. Lines that don’t start with `$` typically
+> show the output of the previous command. Additionally, PowerShell-specific 
+> examples will use `>` rather than `$`.
 -->
 <blockquote>
 <h3 id="コマンドラインの記法"><a class="header" href="#コマンドラインの記法">コマンドラインの記法</a></h3>
 <p>この章及び、本を通して、端末で使用するなんらかのコマンドを示すことがあります。読者が入力するべき行は、
-全て<code>$</code>で始まります。ただし、読者が<code>$</code>文字を入力する必要はありません; これは各コマンドの開始を示しているだけです。
+全て<code>$</code>で始まります。ただし、読者が<code>$</code>文字を入力する必要はありません;
+これは各コマンドの開始を示すために表示しているコマンドラインプロンプトです。
 <code>$</code>で始まらない行は、典型的には直前のコマンドの出力を示します。また、PowerShell限定の例には、
 <code>$</code>ではなく、<code>&gt;</code>を使用します。</p>
 </blockquote>
@@ -686,21 +684,30 @@ for your password. If the install is successful, the following line will appear:
 <pre><code class="language-text">Rust is installed now. Great!
 </code></pre>
 <!--
-Additionally, you’ll need a linker of some kind. It’s likely one is already
-installed, but when you try to compile a Rust program and get errors indicating
-that a linker could not execute, that means a linker isn’t installed on your
-system and you’ll need to install one manually. C compilers usually come with
-the correct linker. Check your platform’s documentation for how to install a C
-compiler. Also, some common Rust packages depend on C code and will need a C
-compiler. Therefore, it might be worth installing one now.
+You will also need a *linker*, which is a program that Rust uses to join its
+compiled outputs into one file. It is likely you already have one. If you get 
+linker errors, you should install a C compiler, which will typically include a
+linker. A C compiler is also useful because some common Rust packages depend on
+C code and will need a C compiler.
 -->
-<p>これに加えて、なんらかのリンカが必要になるでしょう。既にインストールされている可能性は高いものの、
-Rustプログラムをコンパイルしようとした時、リンカが実行できないというエラーが出たら、
-システムにリンカがインストールされていないということなので、手動でインストールする必要があるでしょう。
-Cコンパイラは通常正しいリンカとセットになっています。
-自分のプラットフォームのドキュメンテーションを見てCコンパイラのインストール方法を確認してください。
-一般的なRustパッケージの中には、Cコードに依存し、Cコンパイラが必要になるものもあります。
-ですので、Cコンパイラは今のうちにインストールしておく価値があるかもしれません。</p>
+<p><em>リンカ</em>も必要になるでしょう。
+リンカは、コンパイルされた出力をひとつのファイルに合体させるためにRustが使用するプログラムです。
+リンカが既にインストールされている可能性は高いでしょう。
+リンカエラーが発生したときは、Cコンパイラは典型的にリンカを含んでいるでしょうから、Cコンパイラをインストールすべきです。
+一般的なRustパッケージの中には、Cコードに依存し、Cコンパイラが必要になるものもあるので、この理由からもCコンパイラは有用です。</p>
+<!--
+On macOS, you can get a C compiler by running:
+-->
+<p>macOSでは、以下を実行することでCコンパイラが手に入ります:</p>
+<pre><code class="language-console">$ xcode-select --install
+</code></pre>
+<!--
+Linux users should generally install GCC or Clang, according to their
+distribution’s documentation. For example, if you use Ubuntu, you can install
+the `build-essential` package.
+-->
+<p>Linuxユーザは、通常はディストリビューションのドキュメントに従って、GCCまたはClangをインストールするべきです。
+例えばUbuntuを使用している場合は、<code>build-essential</code>パッケージをインストールすれば大丈夫です。</p>
 <!--
 ### Installing `rustup` on Windows
 -->
@@ -708,16 +715,28 @@ Cコンパイラは通常正しいリンカとセットになっています。
 <!--
 On Windows, go to [https://www.rust-lang.org/tools/install][install] and follow
 the instructions for installing Rust. At some point in the installation, you’ll
-receive a message explaining that you’ll also need the C++ build tools for
-Visual Studio 2013 or later. The easiest way to acquire the build tools is to
-install [Build Tools for Visual Studio 2019][visualstudio]. When asked which
-workloads to install make sure "C++ build tools" is selected and that the Windows 10 SDK and the English language pack components are included.
-
+receive a message explaining that you’ll also need the MSVC build tools for
+Visual Studio 2013 or later. 
 -->
 <p>Windowsでは、<a href="https://www.rust-lang.org/tools/install">https://www.rust-lang.org/tools/install</a>に行き、手順に従ってRustをインストールしてください。
-インストールの途中で、Visual Studio 2013以降用のC++ビルドツールも必要になるという旨のメッセージが出るでしょう。
-ビルドツールを取得する最も簡単な方法は、<a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual Studio 2019用のビルドツール</a>をインストールすることです。
-どのワークロード (workloads) をインストールするかと質問されたときは、&quot;C++ build tools&quot;が選択されており、Windows 10 SDKと英語の言語パック (English language pack) が含まれていることを確かめてください。</p>
+インストールの途中で、Visual Studio 2013以降用のMSVCビルドツールも必要になるという旨のメッセージが出るでしょう。</p>
+<!--
+To acquire the build tools, you’ll need to install [Visual Studio
+2022][visualstudio]. When asked which workloads to install, include:
+-->
+<p>ビルドツールを取得するには、<a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2022</a>をインストールする必要があるでしょう。
+どのワークロード (workloads) をインストールするかと質問されたときは、以下を含めてください:</p>
+<!--
+* “Desktop Development with C++”
+* The Windows 10 or 11 SDK
+* The English language pack component, along with any other language pack of
+  your choosing
+-->
+<ul>
+<li>「C++によるデスクトップ開発」(“Desktop Development with C++”)</li>
+<li>Windows 10または11のSDK</li>
+<li>英語の言語パック (English language pack) コンポーネント (お好みで他の任意の言語パックも)</li>
+</ul>
 <blockquote>
 <p>訳注：Windowsの言語を日本語にしている場合は言語パックのところで「日本語」が選択されており、そのままの設定でインストールしても基本的に問題ないはずです。しかし、サードパーティーのツールやライブラリの中には英語の言語パックを必要とするものがあるため、「日本語」に加えて「英語」も選択することをお勧めします。</p>
 </blockquote>
@@ -727,25 +746,6 @@ If there are specific differences, we’ll explain which to use.
 -->
 <p>これ以降、<em>cmd.exe</em>とPowerShellの両方で動くコマンドを使用します。
 特段の違いがあったら、どちらを使用すべきか説明します。</p>
-<!--
-### Updating and Uninstalling
--->
-<h3 id="更新及びアンインストール"><a class="header" href="#更新及びアンインストール">更新及びアンインストール</a></h3>
-<!--
-After you’ve installed Rust via `rustup`, updating to the latest version is
-easy. From your shell, run the following update script:
--->
-<p><code>rustup</code>経由でRustをインストールしたなら、最新版へ更新するのは簡単です。
-シェルから以下の更新スクリプトを実行してください:</p>
-<pre><code class="language-console">$ rustup update
-</code></pre>
-<!--
-To uninstall Rust and `rustup`, run the following uninstall script from your
-shell:
--->
-<p>Rustと<code>rustup</code>をアンインストールするには、シェルから以下のアンインストールスクリプトを実行してください:</p>
-<pre><code class="language-console">$ rustup self uninstall
-</code></pre>
 <!--
 ### Troubleshooting
 -->
@@ -759,24 +759,43 @@ line:
 </code></pre>
 <!--
 You should see the version number, commit hash, and commit date for the latest
-stable version that has been released in the following format:
+stable version that has been released, in the following format:
 -->
-<p>バージョンナンバー、コミットハッシュ、最新の安定版がリリースされたコミット日時が以下のフォーマットで表示されるのを目撃するはずです。</p>
+<p>リリース済みの最新の安定版のバージョンナンバー、コミットハッシュ、コミット日が以下の形式で表示されるはずです。</p>
 <pre><code class="language-text">rustc x.y.z (abcabcabc yyyy-mm-dd)
 </code></pre>
 <!--
 If you see this information, you have installed Rust successfully! If you don’t
-see this information and you’re on Windows, check that Rust is in your `%PATH%`
-system variable. If that’s all correct and Rust still isn’t working, there are
-a number of places you can get help. The easiest is the #beginners channel on
-[the official Rust Discord][discord]. There, you can chat with other Rustaceans
-(a silly nickname we call ourselves) who can help you out. Other great
-resources include [the Users forum][users] and [Stack Overflow][stackoverflow].
+see this information, check that Rust is in your `%PATH%` system variable as
+follows.
 -->
-<p>この情報が見られたなら、Rustのインストールに成功しています！この情報が出ず、Windowsを使っているなら、
-Rustが<code>%PATH%</code>システム環境変数にあることを確認してください。これらが全て正常であるのに、それでもRustがうまく動かないなら、
-助力を得られる場所はたくさんあります。最も簡単なのが<a href="https://discord.gg/rust-lang">Rustの公式Discord</a>の#beginnersチャンネルです。そのアドレスで、助けてくれる他のRustacean (Rustユーザが自分たちのことを呼ぶ、冗談めいたニックネーム) たちとチャットできます。
-他にも、素晴らしいリソースとして<a href="https://users.rust-lang.org/">ユーザ・フォーラム</a>と<a href="https://stackoverflow.com/questions/tagged/rust">Stack Overflow</a>が挙げられます。</p>
+<p>この情報が見られたなら、Rustのインストールに成功しています！
+この情報が出ない場合は、次のようにしてRustが<code>%PATH%</code>システム環境変数にあることを確認してください。</p>
+<!--
+In Windows CMD, use:
+-->
+<p>Windows CMDでは:</p>
+<pre><code class="language-console">&gt; echo %PATH%
+</code></pre>
+<!--
+In PowerShell, use:
+-->
+<p>PowerShellでは:</p>
+<pre><code class="language-powershell">&gt; echo $env:Path
+</code></pre>
+<!--
+In Linux and macOS, use:
+-->
+<p>LinuxおよびmacOSでは:</p>
+<pre><code class="language-console">$ echo $PATH
+</code></pre>
+<!--
+If that’s all correct and Rust still isn’t working, there are a number of
+places you can get help. Find out how to get in touch with other Rustaceans (a
+silly nickname we call ourselves) on [the community page][community].
+-->
+<p>これらが全て正常であるのに、それでもRustがうまく動かないなら、助力を得られる場所はたくさんあります。
+他のRustacean（Rustユーザが自分たちのことを呼ぶ、冗談めいたニックネーム）たちと交流する方法を<a href="https://www.rust-lang.org/community">コミュニティページ</a>で探してください。</p>
 <blockquote>
 <p>訳注1：Rustaceanについて、いらないかもしれない補足です。<a href="https://mobile.twitter.com/rustlang/status/916284650674323457">公式Twitter曰く、Rustaceanはcrustaceans（甲殻類）から来ている</a>そうです。
 そのため、Rustのマスコットは（非公式らしいですが）<a href="https://www.slideshare.net/wolf-dog/ss-64026540">カニ</a>。上の会話でCの欠点を削ぎ落としているからcを省いてるの？みたいなことを聞いていますが、
@@ -784,19 +803,38 @@ Rustが<code>%PATH%</code>システム環境変数にあることを確認して
 明日使えるかもしれないトリビアでした。</p>
 </blockquote>
 <blockquote>
-<p>訳注2：上にある公式Discordは英語話者のコミュニティです。日本語話者のためのコミュニティが<a href="https://rust-lang-jp.zulipchat.com">Zulip rust-lang-jpにあり</a>、こちらでもRustaceanたちが活発に議論をしています。
+<p>訳注2：上にあるコミュニティページはどれも英語話者のコミュニティへのリンク集です。日本語話者のためのコミュニティが<a href="https://rust-lang-jp.zulipchat.com">Zulip rust-lang-jpにあり</a>、こちらでもRustaceanたちが活発に議論をしています。
 公式Discord同様、初心者向けの#beginnersチャンネルが存在するので、気軽に質問してみてください。</p>
 </blockquote>
+<!--
+### Updating and Uninstalling
+-->
+<h3 id="更新及びアンインストール"><a class="header" href="#更新及びアンインストール">更新及びアンインストール</a></h3>
+<!--
+Once Rust is installed via `rustup`, updating to a newly released version is
+easy. From your shell, run the following update script:
+-->
+<p><code>rustup</code>経由でRustがインストールされたなら、新しくリリースされた版へ更新するのは簡単です。
+シェルから以下の更新スクリプトを実行してください:</p>
+<pre><code class="language-console">$ rustup update
+</code></pre>
+<!--
+To uninstall Rust and `rustup`, run the following uninstall script from your
+shell:
+-->
+<p>Rustと<code>rustup</code>をアンインストールするには、シェルから以下のアンインストールスクリプトを実行してください:</p>
+<pre><code class="language-console">$ rustup self uninstall
+</code></pre>
 <!--
 ### Local Documentation
 -->
 <h3 id="ローカルのドキュメンテーション"><a class="header" href="#ローカルのドキュメンテーション">ローカルのドキュメンテーション</a></h3>
 <!--
-The installation of Rust also includes a copy of the documentation locally, so
-you can read it offline. Run `rustup doc` to open the local documentation in
-your browser.
+The installation of Rust also includes a local copy of the documentation so
+that you can read it offline. Run `rustup doc` to open the local documentation
+in your browser.
 -->
-<p>インストールされたRustには、ローカルに複製されたドキュメンテーションのコピーが含まれているので、これをオフラインで閲覧することができます。
+<p>インストールされたRustには、オフラインでドキュメンテーションを閲覧できるように、ドキュメンテーションのローカルコピーが含まれています。
 ブラウザでローカルのドキュメンテーションを開くには、<code>rustup doc</code>を実行してください。</p>
 <!--
 Any time a type or function is provided by the standard library and you’re not
@@ -809,9 +847,9 @@ sure what it does or how to use it, use the application programming interface
 -->
 <h2 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h2>
 <!--
-Now that you’ve installed Rust, let’s write your first Rust program. It’s
-traditional when learning a new language to write a little program that prints
-the text `Hello, world!` to the screen, so we’ll do the same here!
+Now that you’ve installed Rust, it’s time to write your first Rust program.
+It’s traditional when learning a new language to write a little program that
+prints the text `Hello, world!` to the screen, so we’ll do the same here!
 -->
 <p>Rustをインストールしたので、最初のRustプログラムを書きましょう。新しい言語を学ぶ際に、
 <code>Hello, world!</code>というテキストを画面に出力する小さなプログラムを書くことは伝統的なことなので、
@@ -821,16 +859,17 @@ the text `Hello, world!` to the screen, so we’ll do the same here!
 > no specific demands about your editing or tooling or where your code lives, so
 > if you prefer to use an integrated development environment (IDE) instead of
 > the command line, feel free to use your favorite IDE. Many IDEs now have some
-> degree of Rust support; check the IDE’s documentation for details. Recently,
-> the Rust team has been focusing on enabling great IDE support, and progress
-> has been made rapidly on that front!
+> degree of Rust support; check the IDE’s documentation for details. The Rust
+> team has been focusing on enabling great IDE support via `rust-analyzer`. See
+> [Appendix D][devtools] for more details.
 -->
 <blockquote>
 <p>注釈: この本は、コマンドラインに基礎的な馴染みがあることを前提にしています。Rustは、編集やツール、
 どこにコードがあるかについて特定の要求をしないので、コマンドラインではなくIDEを使用することを好むのなら、
 どうぞご自由にお気に入りのIDEを使用してください。今では、多くのIDEがなんらかの形でRustをサポートしています;
-詳しくは、IDEのドキュメンテーションをご覧ください。最近、Rustチームは優れたIDEサポートを有効にすることに注力し、
-その前線で急激に成果があがっています！</p>
+詳しくは、IDEのドキュメンテーションをご覧ください。
+Rustチームは<code>rust-analyzer</code>を介して優れたIDEサポートを可能にすることに注力しています。
+詳しくは<a href="appendix-04-useful-development-tools.html">付録D</a>をご覧ください。</p>
 </blockquote>
 <!--
 ### Creating a Project Directory
@@ -846,15 +885,15 @@ your projects there.
 この本の練習とプロジェクトのために、ホームディレクトリに<em>projects</em>ディレクトリを作成してプロジェクトを全てそこに保管することを推奨します。</p>
 <!--
 Open a terminal and enter the following commands to make a *projects* directory
-and a directory for the Hello, world! project within the *projects* directory.
+and a directory for the “Hello, world!” project within the *projects* directory.
 -->
 <p>端末を開いて以下のコマンドを入力し、<em>projects</em>ディレクトリと、
-<em>projects</em>ディレクトリ内にHello, world!プロジェクトのディレクトリを作成してください。</p>
+<em>projects</em>ディレクトリ内に「Hello, world!」プロジェクトのディレクトリを作成してください。</p>
 <!--
-For Linux and macOS, enter this:
+For Linux, macOS, and PowerShell on Windows, enter this:
 -->
-<p>LinuxとmacOSなら、こう入力してください:</p>
-<pre><code class="language-text">$ mkdir ~/projects
+<p>Linux、macOS、そしてWindows上のPowerShellなら、こう入力してください:</p>
+<pre><code class="language-console">$ mkdir ~/projects
 $ cd ~/projects
 $ mkdir hello_world
 $ cd hello_world
@@ -869,26 +908,17 @@ For Windows CMD, enter this:
 &gt; cd hello_world
 </code></pre>
 <!--
-For Windows PowerShell, enter this:
--->
-<p>WindowsのPowerShellなら、こう:</p>
-<pre><code class="language-powershell">&gt; mkdir $env:USERPROFILE\projects
-&gt; cd $env:USERPROFILE\projects
-&gt; mkdir hello_world
-&gt; cd hello_world
-</code></pre>
-<!--
 ### Writing and Running a Rust Program
 -->
 <h3 id="rustプログラムを書いて走らせる"><a class="header" href="#rustプログラムを書いて走らせる">Rustプログラムを書いて走らせる</a></h3>
 <!--
 Next, make a new source file and call it *main.rs*. Rust files always end with
-the *.rs* extension. If you’re using more than one word in your filename, use
-an underscore to separate them. For example, use *hello_world.rs* rather than
-*helloworld.rs*.
+the *.rs* extension. If you’re using more than one word in your filename, the
+convention is to use an underscore to separate them. For example, use
+*hello_world.rs* rather than *helloworld.rs*.
 -->
 <p>次にソースファイルを作り、<em>main.rs</em>というファイル名にしてください。Rustのファイルは常に <em>.rs</em>という拡張子で終わります。
-ファイル名に2単語以上使っているなら、アンダースコアで区切ってください。例えば、<em>helloworld.rs</em>ではなく、
+ファイル名に2単語以上使っているなら、アンダースコアで区切るのが規約です。例えば、<em>helloworld.rs</em>ではなく、
 <em>hello_world.rs</em>を使用してください。</p>
 <!--
 Now open the *main.rs* file you just created and enter the code in Listing 1-1.
@@ -907,12 +937,13 @@ Now open the *main.rs* file you just created and enter the code in Listing 1-1.
 -->
 <p><span class="caption">リスト1-1: <code>Hello, world!</code>と出力するプログラム</span></p>
 <!--
-Save the file and go back to your terminal window. On Linux or macOS, enter
-the following commands to compile and run the file:
+Save the file and go back to your terminal window in the
+*~/projects/hello_world* directory. On Linux or macOS, enter the following
+commands to compile and run the file:
 -->
-<p>ファイルを保存し、端末ウィンドウに戻ってください。LinuxかmacOSなら、以下のコマンドを打ってファイルをコンパイルし、
-実行してください:</p>
-<pre><code class="language-text">$ rustc main.rs
+<p>ファイルを保存し、<em>~/projects/hello_world</em>ディレクトリの端末ウィンドウに戻ってください。
+LinuxかmacOSなら、以下のコマンドを打ってファイルをコンパイルし、実行してください:</p>
+<pre><code class="language-console">$ rustc main.rs
 $ ./main
 Hello, world!
 </code></pre>
@@ -926,14 +957,15 @@ Hello, world!
 </code></pre>
 <!--
 Regardless of your operating system, the string `Hello, world!` should print to
-the terminal. If you don’t see this output, refer back to the “Troubleshooting”
+the terminal. If you don’t see this output, refer back to the
+[“Troubleshooting”][troubleshooting] part of the Installation
 section for ways to get help.
 -->
 <p>OSに関わらず、<code>Hello, world!</code>という文字列が端末に出力されるはずです。この出力が見れないなら、
-「トラブルシューティング」節に立ち戻って、助けを得る方法を参照してください。</p>
+インストールの節の<a href="ch01-01-installation.html#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">「トラブルシューティング」</a>の部分に立ち戻って、助けを得る方法を参照してください。</p>
 <!--
 If `Hello, world!` did print, congratulations! You’ve officially written a Rust
-program. That makes you a Rust programmer-welcome!
+program. That makes you a Rust programmer—welcome!
 -->
 <p><code>Hello, world!</code>が確かに出力されたら、おめでとうございます！正式にRustプログラムを書きました。
 Rustプログラマになったのです！ようこそ！</p>
@@ -942,64 +974,69 @@ Rustプログラマになったのです！ようこそ！</p>
 -->
 <h3 id="rustプログラムの解剖"><a class="header" href="#rustプログラムの解剖">Rustプログラムの解剖</a></h3>
 <!--
-Let’s review in detail what just happened in your Hello, world! program.
-Here’s the first piece of the puzzle:
+Let’s review this “Hello, world!” program in detail. Here’s the first piece of
+the puzzle:
 -->
-<p>Hello, world!プログラムでいま何が起こったのか詳しく確認しましょう。
+<p>この「Hello, world!」プログラムを詳しく再確認しましょう。
 こちらがパズルの最初のピースです:</p>
 <pre><pre class="playground"><code class="language-rust">fn main() {
 
 }</code></pre></pre>
 <!--
-These lines define a function in Rust. The `main` function is special: it is
-always the first code that runs in every executable Rust program. The first
-line declares a function named `main` that has no parameters and returns
-nothing. If there were parameters, they would go inside the parentheses, `()`.
+These lines define a function named `main`. The `main` function is special: it
+is always the first code that runs in every executable Rust program. Here, the
+first line declares a function named `main` that has no parameters and returns
+nothing. If there were parameters, they would go inside the parentheses `()`.
 -->
-<p>これらの行でRustで関数を定義しています。<code>main</code>関数は特別です: 常に全ての実行可能なRustプログラムで走る最初のコードになります。
-1行目は、引数がなく、何も返さない<code>main</code>という関数を宣言しています。引数があるなら、かっこ(<code>()</code>)の内部に入ります。</p>
+<p>これらの行は<code>main</code>という名前の関数を定義しています。<code>main</code>関数は特別です: 常に全ての実行可能なRustプログラムで走る最初のコードになります。
+ここで、1行目は、引数がなく何も返さない<code>main</code>という関数を宣言しています。引数があるなら、かっこ(<code>()</code>)の内部に入ります。</p>
 <!--
-Also, note that the function body is wrapped in curly brackets, `{}`. Rust
-requires these around all function bodies. It’s good style to place the opening
-curly bracket on the same line as the function declaration, adding one space in
-between.
+The function body is wrapped in `{}`. Rust requires curly brackets around all
+function bodies. It’s good style to place the opening curly bracket on the same
+line as the function declaration, adding one space in between.
 -->
-<p>また、関数の本体が波括弧(<code>{}</code>)に包まれていることにも注目してください。Rustでは、全ての関数本体の周りにこれらが必要になります。
+<p>関数の本体は<code>{}</code>に包まれます。Rustでは、全ての関数本体の周りに波括弧が必要になります。
 スペースを1つあけて、開き波括弧を関数宣言と同じ行に配置するのがいいスタイルです。</p>
 <!--
-If you want to stick to a standard style across Rust projects, you can use an
-automatic formatter tool called `rustfmt` to format your code in a particular
-style. The Rust team has included this tool with the standard Rust distribution,
-like `rustc`, so it should already be installed on your computer! Check the
-online documentation for more details.
+> Note: If you want to stick to a standard style across Rust projects, you can
+> use an automatic formatter tool called `rustfmt` to format your code in a
+> particular style (more on `rustfmt` in
+> [Appendix D][devtools]). The Rust team has included this tool
+> with the standard Rust distribution, as `rustc` is, so it should already be
+> installed on your computer!
 -->
-<p>複数のRustプロジェクトに渡って標準的なスタイルにこだわりたいなら、<code>rustfmt</code>を使うことでコードを決まったスタイルに整形できるでしょう。
-Rustチームは、<code>rustc</code>のように標準的なRustの配布にこのツールを含んでいるため、既にコンピューターにインストールされているはずです！
-詳細は、オンラインのドキュメンテーションを確認してください。</p>
+<blockquote>
+<p>注釈: 複数のRustプロジェクトに渡って標準的なスタイルにこだわりたいなら、<code>rustfmt</code>を使うことでコードを決まったスタイルに整形できるでしょう（<code>rustfmt</code>の詳細は<a href="appendix-04-useful-development-tools.html">付録D</a>で）。
+Rustチームは、<code>rustc</code>のように標準的なRustの配布にこのツールを含んでいるため、既にコンピューターにインストールされているはずです！</p>
+</blockquote>
 <!--
-Inside the `main` function is the following code:
+The body of the `main` function holds the following code:
 -->
-<p><code>main</code>関数内には、こんなコードがあります:</p>
+<p><code>main</code>関数の本体は、こんなコードを抱えています:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    println!(&quot;Hello, world!&quot;);
 <span class="boring">}</span></code></pre></pre>
 <!--
 This line does all the work in this little program: it prints text to the
-screen. There are four important details to notice here. First, Rust style is
-to indent with four spaces, not a tab.
+screen. There are four important details to notice here.
 -->
 <p>この行が、この小さなプログラムの全作業をしています: テキストを画面に出力するのです。
-ここで気付くべき重要な詳細が4つあります。まず、Rustのスタイルは、タブではなく、4スペースでインデントするということです。</p>
+ここで気付くべき重要な詳細が4つあります。</p>
 <!--
-Second, `println!` calls a Rust macro. If it called a function instead, it
+First, Rust style is to indent with four spaces, not a tab.
+-->
+<p>まず、Rustのスタイルは、タブではなく、4スペースでインデントするということです。</p>
+<!--
+Second, `println!` calls a Rust macro. If it had called a function instead, it
 would be entered as `println` (without the `!`). We’ll discuss Rust macros in
-more detail in Appendix D. For now, you just need to know that using a `!`
-means that you’re calling a macro instead of a normal function.
+more detail in Chapter 19. For now, you just need to know that using a `!`
+means that you’re calling a macro instead of a normal function and that macros
+don’t always follow the same rules as functions.
 -->
 <p>2番目に<code>println!</code>はRustのマクロを呼び出すということです。代わりに関数を呼んでいたら、
 <code>println</code>(<code>!</code>なし)と入力されているでしょう。Rustのマクロについて詳しくは、第19章で議論します。
-とりあえず、<code>!</code>を使用すると、普通の関数ではなくマクロを呼んでいるのだということを知っておくだけでいいでしょう。</p>
+とりあえず、<code>!</code>を使用すると、普通の関数ではなくマクロを呼んでいるのだということと、マクロは関数と同じルールには必ずしも従わないということを知っておくだけでいいでしょう。</p>
 <!--
 Third, you see the `"Hello, world!"` string. We pass this string as an argument
 to `println!`, and the string is printed to the screen.
@@ -1029,7 +1066,7 @@ this:
 -->
 <p>Rustプログラムを実行する前に、以下のように、<code>rustc</code>コマンドを入力し、ソースファイルの名前を渡すことで、
 Rustコンパイラを使用してコンパイルしなければなりません。</p>
-<pre><code class="language-text">$ rustc main.rs
+<pre><code class="language-console">$ rustc main.rs
 </code></pre>
 <!--
 If you have a C or C++ background, you’ll notice that this is similar to `gcc`
@@ -1039,16 +1076,20 @@ or `clang`. After compiling successfully, Rust outputs a binary executable.
 Rustはバイナリの実行可能ファイルを出力します。</p>
 <!--
 On Linux, macOS, and PowerShell on Windows, you can see the executable by
-entering the `ls` command in your shell as follows:
+entering the `ls` command in your shell:
 -->
-<p>Linux、macOS、WindowsのPowerShellなら、シェルで以下のように<code>ls</code>コマンドを入力することで実行可能ファイルを見られます:</p>
-<pre><code class="language-text">$ ls
+<p>Linux、macOS、WindowsのPowerShellなら、シェルで<code>ls</code>コマンドを入力することで実行可能ファイルを見られます:</p>
+<pre><code class="language-console">$ ls
 main  main.rs
 </code></pre>
 <!--
-With CMD on Windows, you would enter the following:
+On Linux and macOS, you’ll see two files. With PowerShell on Windows, you’ll
+see the same three files that you would see using CMD. With CMD on Windows, you
+would enter the following:
 -->
-<p>WindowsのCMDなら、以下のように入力するでしょう:</p>
+<p>LinuxとmacOSでは、2つのファイルが見えるでしょう。
+WindowsのPowerShellでは、CMDを使ったときに見ることになるのと同じ3つのファイルが見えるでしょう。
+WindowsのCMDなら、以下のように入力するでしょう:</p>
 <pre><code class="language-cmd">&gt; dir /B %= the /B option says to only show the file names =%
          %= /Bオプションは、ファイル名だけを表示することを宣言する =%
 main.exe
@@ -1058,23 +1099,20 @@ main.rs
 <!--
 This shows the source code file with the *.rs* extension, the executable file
 (*main.exe* on Windows, but *main* on all other platforms), and, when using
-CMD, a file containing debugging information with the *.pdb* extension. From
-here, you run the *main* or *main.exe* file, like this:
+Windows, a file containing debugging information with the *.pdb* extension.
+From here, you run the *main* or *main.exe* file, like this:
 -->
 <p>これは、<em>.rs</em>拡張子のソースコードファイル、実行可能ファイル(Windowsなら<em>main.exe</em>、他のプラットフォームでは、<em>main</em>)、
-そして、CMDを使用しているなら、<em>.pdb</em>拡張子のデバッグ情報を含むファイルを表示します。ここから、
+そして、Windowsを使用しているなら、<em>.pdb</em>拡張子のデバッグ情報を含むファイルを表示します。ここから、
 <em>main</em>か<em>main.exe</em>を走らせます。このように:</p>
-<pre><code class="language-text">$ ./main # or .\main.exe on Windows
+<pre><code class="language-console">$ ./main # or .\main.exe on Windows
          # または、Widnowsなら.\main.exe
 </code></pre>
 <!--
-If *main.rs* was your Hello, world! program, this line would print `Hello,
+If your *main.rs* is your “Hello, world!” program, this line prints `Hello,
 world!` to your terminal.
 -->
-<p><em>main.rs</em>がHello, world!プログラムなら、この行は<code>Hello, world!</code>と端末に出力するでしょう。</p>
-<!--
-*.rb*がなぜかイタリックにならない
--->
+<p><em>main.rs</em>がHello, world!プログラムなら、この行は<code>Hello, world!</code>と端末に出力します。</p>
 <!--
 If you’re more familiar with a dynamic language, such as Ruby, Python, or
 JavaScript, you might not be used to compiling and running a program as
@@ -1100,6 +1138,10 @@ real-world Rust programs.
 <p>簡単なプログラムなら<code>rustc</code>でコンパイルするだけでも十分ですが、プロジェクトが肥大化してくると、
 オプションを全て管理し、自分のコードを簡単に共有したくなるでしょう。次は、Cargoツールを紹介します。
 これは、現実世界のRustプログラムを書く手助けをしてくれるでしょう。</p>
+<!--
+[troubleshooting]: ch01-01-installation.html#troubleshooting
+[devtools]: appendix-04-useful-development-tools.html
+-->
 <div style="break-before: page; page-break-before: always;"></div><!--
 ## Hello, Cargo!
 -->
@@ -1117,13 +1159,13 @@ building those libraries. (We call the libraries that your code needs
 （コードが必要とするライブラリのことを<em>依存</em>（dependencies）と呼びます）</p>
 <!--
 The simplest Rust programs, like the one we’ve written so far, don’t have any
-dependencies. So if we had built the “Hello, world!” project with Cargo, it
-would only use the part of Cargo that handles building your code. As you write
-more complex Rust programs, you’ll add dependencies, and if you start a project
+dependencies. If we had built the “Hello, world!” project with Cargo, it would
+only use the part of Cargo that handles building your code. As you write more
+complex Rust programs, you’ll add dependencies, and if you start a project
 using Cargo, adding dependencies will be much easier to do.
 -->
 <p>いままでに書いたようなごく単純なRustプログラムには依存がありません。
-そのため「Hello, world!」プロジェクトをCargoでビルドしても、Cargoの中のコードをビルドする部分しか使わないでしょう。
+「Hello, world!」プロジェクトをCargoでビルドしても、Cargoの中のコードをビルドする部分しか使わないでしょう。
 より複雑なRustプログラムを書くようになると依存を追加することになりますが、Cargoを使ってプロジェクトを開始したなら、依存の追加もずっと簡単になります。</p>
 <!--
 Because the vast majority of Rust projects use Cargo, the rest of this book
@@ -1131,7 +1173,7 @@ assumes that you’re using Cargo too. Cargo comes installed with Rust if you
 used the official installers discussed in the
 [“Installation”][installation] section. If you installed Rust
 through some other means, check whether Cargo is installed by entering the
-following into your terminal:
+following in your terminal:
 -->
 <p>Rustプロジェクトの大多数がCargoを使用しているので、これ以降、この本では、あなたもCargoを使用していると想定します。
 もし<a href="ch01-01-installation.html#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">「インストール」</a>節で紹介した公式のインストーラを使用したなら、CargoはRustと共にインストールされています。
@@ -1151,9 +1193,9 @@ determine how to install Cargo separately.
 <h3 id="cargoでプロジェクトを作成する"><a class="header" href="#cargoでプロジェクトを作成する">Cargoでプロジェクトを作成する</a></h3>
 <!--
 Let’s create a new project using Cargo and look at how it differs from our
-original “Hello, world!” project. Navigate back to your *projects* directory (or
-wherever you decided to store your code). Then, on any operating system, run
-the following:
+original “Hello, world!” project. Navigate back to your *projects* directory
+(or wherever you decided to store your code). Then, on any operating system,
+run the following:
 -->
 <p>Cargoを使って新しいプロジェクトを作成し、元の「Hello, world!」プロジェクトとの違いを見ていきましょう。
 <em>projects</em>ディレクトリ（または自分がコードを保存すると決めた場所）に戻ってください。
@@ -1162,11 +1204,11 @@ the following:
 $ cd hello_cargo
 </code></pre>
 <!--
-The first command created a new directory called *hello_cargo*. We’ve named
-our project *hello_cargo*, and Cargo creates its files in a directory of the
-same name.
+The first command creates a new directory and project called *hello_cargo*.
+We’ve named our project *hello_cargo*, and Cargo creates its files in a
+directory of the same name.
 -->
-<p>最初のコマンドは<em>hello_cargo</em>という名の新しいディレクトリを作成します。
+<p>最初のコマンドは<em>hello_cargo</em>という名の新しいディレクトリとプロジェクトを作成します。
 プロジェクトを<em>hello_cargo</em>と名付けたので、Cargoはそれに関連するいくつかのファイルを同名のディレクトリに作成します。</p>
 <!--
 Go into the *hello_cargo* directory and list the files. You’ll see that Cargo
@@ -1209,6 +1251,8 @@ name = &quot;hello_cargo&quot;
 version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [dependencies]
 </code></pre>
 <!--
@@ -1217,10 +1261,10 @@ new`</span>
 -->
 <p><span class="caption">リスト1-2：<code>cargo new</code>で生成された<em>Cargo.toml</em>の内容</span></p>
 <!--
-This file is in the [*TOML*](https://toml.io) (*Tom’s Obvious,
-Minimal Language*) format, which is Cargo’s configuration format.
+This file is in the [*TOML*][toml] (*Tom’s Obvious, Minimal
+Language*) format, which is Cargo’s configuration format.
 -->
-<p>このファイルは<a href="https://toml.io">TOML</a>（<em>Tom's Obvious, Minimal Language</em>、トムの明確な最小限の言語）形式で、Cargoの設定フォーマットです。</p>
+<p>このファイルは<a href="https://toml.io"><em>TOML</em></a>（<em>Tom's Obvious, Minimal Language</em>、トムの明確な最小限の言語）形式で、Cargoの設定フォーマットです。</p>
 <!--
 The first line, `[package]`, is a section heading that indicates that the
 following statements are configuring a package. As we add more information to
@@ -1258,12 +1302,12 @@ Now open *src/main.rs* and take a look:
 }</code></pre></pre>
 <!--
 Cargo has generated a “Hello, world!” program for you, just like the one we
-wrote in Listing 1-1! So far, the differences between our previous project and
-the project Cargo generated are that Cargo placed the code in the *src*
-directory, and we have a *Cargo.toml* configuration file in the top directory.
+wrote in Listing 1-1! So far, the differences between our project and the
+project Cargo generated are that Cargo placed the code in the *src* directory
+and we have a *Cargo.toml* configuration file in the top directory.
 -->
 <p>Cargoはリスト1-1で書いたような「Hello, world!」プログラムを生成してくれています。
-これまでのところ、以前のプロジェクトとCargoが生成したプロジェクトの違いは、Cargoがコードを<em>src</em>ディレクトリに配置したことと、
+これまでのところ、私たちのプロジェクトとCargoが生成したプロジェクトの違いは、Cargoがコードを<em>src</em>ディレクトリに配置したことと、
 最上位のディレクトリに<em>Cargo.toml</em>設定ファイルがあることです。</p>
 <!--
 Cargo expects your source files to live inside the *src* directory. The
@@ -1302,12 +1346,14 @@ entering the following command:
 <!--
 This command creates an executable file in *target/debug/hello_cargo* (or
 *target\debug\hello_cargo.exe* on Windows) rather than in your current
-directory. You can run the executable with this command:
+directory. Because the default build is a debug build, Cargo puts the binary in
+a directory named *debug*. You can run the executable with this command:
 -->
 <p>このコマンドは実行ファイルを現在のディレクトリではなく、<em>target/debug/hello_cargo</em>（Windowsでは<em>target/debug/hello_cargo.exe</em>）に作成します。
+デフォルトのビルドはデバッグビルドなので、Cargoはバイナリを<em>debug</em>という名前のディレクトリの中に入れます。
 以下のコマンドで実行ファイルを実行できます。</p>
 <pre><code class="language-console">$ ./target/debug/hello_cargo # or .\target\debug\hello_cargo.exe on Windows
-$                              # Windowsでは .\target\debug\hello_cargo.exe
+                             # Windowsでは .\target\debug\hello_cargo.exe
 Hello, world!
 </code></pre>
 <!--
@@ -1327,7 +1373,7 @@ Cargoがその内容を管理してくれます。</p>
 <!--
 We just built a project with `cargo build` and ran it with
 `./target/debug/hello_cargo`, but we can also use `cargo run` to compile the
-code and then run the resulting executable all in one command:
+code and then run the resultant executable all in one command:
 -->
 <p>先ほどは<code>cargo build</code>でプロジェクトをビルドし、<code>./target/debug/hello_cargo</code>で実行しました。
 <code>cargo run</code>を使うと、コードのコンパイルから、できた実行ファイルの実行までの全体を一つのコマンドで行えます。</p>
@@ -1337,13 +1383,21 @@ code and then run the resulting executable all in one command:
 Hello, world!
 </code></pre>
 <!--
+Using `cargo run` is more convenient than having to remember to run `cargo
+build` and then use the whole path to the binary, so most developers use `cargo
+run`.
+-->
+<p><code>cargo build</code>を実行してから、バイナリへのパス全体を使って実行する、という手順をいちいち踏むより、
+<code>cargo run</code>を使う方が便利なので、ほとんどの開発者は<code>cargo run</code>を使います。</p>
+<!--
 Notice that this time we didn’t see output indicating that Cargo was compiling
-`hello_cargo`. Cargo figured out that the files hadn’t changed, so it just ran
-the binary. If you had modified your source code, Cargo would have rebuilt the
-project before running it, and you would have seen this output:
+`hello_cargo`. Cargo figured out that the files hadn’t changed, so it didn’t
+rebuild but just ran the binary. If you had modified your source code, Cargo
+would have rebuilt the project before running it, and you would have seen this
+output:
 -->
 <p>今回はCargoが<code>hello_cargo</code>をコンパイルしていることを示す出力がないことに注目してください。
-Cargoはファイルが変更されていないことに気づいたので、単にバイナリを実行したのです。
+Cargoはファイルが変更されていないことに気づいたので、再ビルドせずに単にバイナリを実行したのです。
 もしソースコードを変更していたら、Cargoは実行前にプロジェクトを再ビルドし、以下のような出力が表示されたことでしょう。</p>
 <pre><code class="language-console">$ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
@@ -1363,15 +1417,16 @@ your code to make sure it compiles but doesn’t produce an executable:
 </code></pre>
 <!--
 Why would you not want an executable? Often, `cargo check` is much faster than
-`cargo build`, because it skips the step of producing an executable. If you’re
+`cargo build` because it skips the step of producing an executable. If you’re
 continually checking your work while writing the code, using `cargo check` will
-speed up the process! As such, many Rustaceans run `cargo check` periodically
-as they write their program to make sure it compiles. Then they run `cargo
-build` when they’re ready to use the executable.
+speed up the process of letting you know if your project is still compiling! As
+such, many Rustaceans run `cargo check` periodically as they write their
+program to make sure it compiles. Then they run `cargo build` when they’re
+ready to use the executable.
 -->
 <p>なぜ実行可能ファイルが欲しくないのでしょうか？
 <code>cargo check</code>は実行ファイルを生成するステップを省くことができるので、多くの場合、<code>cargo build</code>よりもずっと高速です。
-もし、あなたがコードを書きながら継続的にチェックするのなら、<code>cargo check</code>を使えば、そのプロセスを高速化できます！
+もし、あなたがコードを書きながら継続的にチェックするのなら、<code>cargo check</code>を使えば、プロジェクトがまだコンパイルできるか確認するプロセスを高速化できます！
 そのため多くのRustaceanはプログラムを書きながら定期的に<code>cargo check</code>を実行し、コンパイルできるか確かめます。
 そして、実行ファイルを使う準備ができたときに<code>cargo build</code>を走らせるのです。</p>
 <!--
@@ -1431,12 +1486,13 @@ the executable in *target/release*.
 <!--
 With simple projects, Cargo doesn’t provide a lot of value over just using
 `rustc`, but it will prove its worth as your programs become more intricate.
-With complex projects composed of multiple crates, it’s much easier to let
-Cargo coordinate the build.
+Once programs grow to multiple files or need a dependency, it’s much easier to
+let Cargo coordinate the build.
 -->
 <p>単純なプロジェクトでは、Cargoは単に<code>rustc</code>を使うことに対してあまり多くの価値を生みません。
 しかし、プログラムが複雑になるにつれて、その価値を証明することになるでしょう。
-複数のクレートからなる複雑なプロジェクトでは、Cargoにビルドを調整させるほうがずっと簡単です。</p>
+プログラムが複数のファイルに分かれるほど大きくなったり、依存が必要になってくると、
+Cargoにビルドを調整させるほうがずっと簡単です。</p>
 <!--
 Even though the `hello_cargo` project is simple, it now uses much of the real
 tooling you’ll use in the rest of your Rust career. In fact, to work on any
@@ -1450,9 +1506,7 @@ $ cd someproject
 $ cargo build
 </code></pre>
 <!--
-For more information about Cargo, check out [its documentation].
-
-[its documentation]: https://doc.rust-lang.org/cargo/
+For more information about Cargo, check out [its documentation][cargo].
 -->
 <p>Cargoの詳細については、<a href="https://doc.rust-lang.org/cargo/">ドキュメント</a>を参照してください。</p>
 <!--
@@ -1490,7 +1544,9 @@ Rust, see Chapter 3 and then return to Chapter 2.
 もし、一般的なプログラミングの概念がRustでどう実現されるか学ぶことから始めたいのであれば、第3章を読んで、それから第2章に戻ってください。</p>
 <!--
 [installation]: ch01-01-installation.html#installation
+[toml]: https://toml.io
 [appendix-e]: appendix-05-editions.html
+[cargo]: https://doc.rust-lang.org/cargo/
 -->
 <div style="break-before: page; page-break-before: always;"></div><!--
 # Programming a Guessing Game

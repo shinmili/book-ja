@@ -161,13 +161,13 @@ building those libraries. (We call the libraries that your code needs
 （コードが必要とするライブラリのことを<em>依存</em>（dependencies）と呼びます）</p>
 <!--
 The simplest Rust programs, like the one we’ve written so far, don’t have any
-dependencies. So if we had built the “Hello, world!” project with Cargo, it
-would only use the part of Cargo that handles building your code. As you write
-more complex Rust programs, you’ll add dependencies, and if you start a project
+dependencies. If we had built the “Hello, world!” project with Cargo, it would
+only use the part of Cargo that handles building your code. As you write more
+complex Rust programs, you’ll add dependencies, and if you start a project
 using Cargo, adding dependencies will be much easier to do.
 -->
 <p>いままでに書いたようなごく単純なRustプログラムには依存がありません。
-そのため「Hello, world!」プロジェクトをCargoでビルドしても、Cargoの中のコードをビルドする部分しか使わないでしょう。
+「Hello, world!」プロジェクトをCargoでビルドしても、Cargoの中のコードをビルドする部分しか使わないでしょう。
 より複雑なRustプログラムを書くようになると依存を追加することになりますが、Cargoを使ってプロジェクトを開始したなら、依存の追加もずっと簡単になります。</p>
 <!--
 Because the vast majority of Rust projects use Cargo, the rest of this book
@@ -175,7 +175,7 @@ assumes that you’re using Cargo too. Cargo comes installed with Rust if you
 used the official installers discussed in the
 [“Installation”][installation] section. If you installed Rust
 through some other means, check whether Cargo is installed by entering the
-following into your terminal:
+following in your terminal:
 -->
 <p>Rustプロジェクトの大多数がCargoを使用しているので、これ以降、この本では、あなたもCargoを使用していると想定します。
 もし<a href="ch01-01-installation.html#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">「インストール」</a>節で紹介した公式のインストーラを使用したなら、CargoはRustと共にインストールされています。
@@ -195,9 +195,9 @@ determine how to install Cargo separately.
 <h3 id="cargoでプロジェクトを作成する"><a class="header" href="#cargoでプロジェクトを作成する">Cargoでプロジェクトを作成する</a></h3>
 <!--
 Let’s create a new project using Cargo and look at how it differs from our
-original “Hello, world!” project. Navigate back to your *projects* directory (or
-wherever you decided to store your code). Then, on any operating system, run
-the following:
+original “Hello, world!” project. Navigate back to your *projects* directory
+(or wherever you decided to store your code). Then, on any operating system,
+run the following:
 -->
 <p>Cargoを使って新しいプロジェクトを作成し、元の「Hello, world!」プロジェクトとの違いを見ていきましょう。
 <em>projects</em>ディレクトリ（または自分がコードを保存すると決めた場所）に戻ってください。
@@ -206,11 +206,11 @@ the following:
 $ cd hello_cargo
 </code></pre>
 <!--
-The first command created a new directory called *hello_cargo*. We’ve named
-our project *hello_cargo*, and Cargo creates its files in a directory of the
-same name.
+The first command creates a new directory and project called *hello_cargo*.
+We’ve named our project *hello_cargo*, and Cargo creates its files in a
+directory of the same name.
 -->
-<p>最初のコマンドは<em>hello_cargo</em>という名の新しいディレクトリを作成します。
+<p>最初のコマンドは<em>hello_cargo</em>という名の新しいディレクトリとプロジェクトを作成します。
 プロジェクトを<em>hello_cargo</em>と名付けたので、Cargoはそれに関連するいくつかのファイルを同名のディレクトリに作成します。</p>
 <!--
 Go into the *hello_cargo* directory and list the files. You’ll see that Cargo
@@ -253,6 +253,8 @@ name = &quot;hello_cargo&quot;
 version = &quot;0.1.0&quot;
 edition = &quot;2021&quot;
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [dependencies]
 </code></pre>
 <!--
@@ -261,10 +263,10 @@ new`</span>
 -->
 <p><span class="caption">リスト1-2：<code>cargo new</code>で生成された<em>Cargo.toml</em>の内容</span></p>
 <!--
-This file is in the [*TOML*](https://toml.io) (*Tom’s Obvious,
-Minimal Language*) format, which is Cargo’s configuration format.
+This file is in the [*TOML*][toml] (*Tom’s Obvious, Minimal
+Language*) format, which is Cargo’s configuration format.
 -->
-<p>このファイルは<a href="https://toml.io">TOML</a>（<em>Tom's Obvious, Minimal Language</em>、トムの明確な最小限の言語）形式で、Cargoの設定フォーマットです。</p>
+<p>このファイルは<a href="https://toml.io"><em>TOML</em></a>（<em>Tom's Obvious, Minimal Language</em>、トムの明確な最小限の言語）形式で、Cargoの設定フォーマットです。</p>
 <!--
 The first line, `[package]`, is a section heading that indicates that the
 following statements are configuring a package. As we add more information to
@@ -302,12 +304,12 @@ Now open *src/main.rs* and take a look:
 }</code></pre></pre>
 <!--
 Cargo has generated a “Hello, world!” program for you, just like the one we
-wrote in Listing 1-1! So far, the differences between our previous project and
-the project Cargo generated are that Cargo placed the code in the *src*
-directory, and we have a *Cargo.toml* configuration file in the top directory.
+wrote in Listing 1-1! So far, the differences between our project and the
+project Cargo generated are that Cargo placed the code in the *src* directory
+and we have a *Cargo.toml* configuration file in the top directory.
 -->
 <p>Cargoはリスト1-1で書いたような「Hello, world!」プログラムを生成してくれています。
-これまでのところ、以前のプロジェクトとCargoが生成したプロジェクトの違いは、Cargoがコードを<em>src</em>ディレクトリに配置したことと、
+これまでのところ、私たちのプロジェクトとCargoが生成したプロジェクトの違いは、Cargoがコードを<em>src</em>ディレクトリに配置したことと、
 最上位のディレクトリに<em>Cargo.toml</em>設定ファイルがあることです。</p>
 <!--
 Cargo expects your source files to live inside the *src* directory. The
@@ -346,12 +348,14 @@ entering the following command:
 <!--
 This command creates an executable file in *target/debug/hello_cargo* (or
 *target\debug\hello_cargo.exe* on Windows) rather than in your current
-directory. You can run the executable with this command:
+directory. Because the default build is a debug build, Cargo puts the binary in
+a directory named *debug*. You can run the executable with this command:
 -->
 <p>このコマンドは実行ファイルを現在のディレクトリではなく、<em>target/debug/hello_cargo</em>（Windowsでは<em>target/debug/hello_cargo.exe</em>）に作成します。
+デフォルトのビルドはデバッグビルドなので、Cargoはバイナリを<em>debug</em>という名前のディレクトリの中に入れます。
 以下のコマンドで実行ファイルを実行できます。</p>
 <pre><code class="language-console">$ ./target/debug/hello_cargo # or .\target\debug\hello_cargo.exe on Windows
-$                              # Windowsでは .\target\debug\hello_cargo.exe
+                             # Windowsでは .\target\debug\hello_cargo.exe
 Hello, world!
 </code></pre>
 <!--
@@ -371,7 +375,7 @@ Cargoがその内容を管理してくれます。</p>
 <!--
 We just built a project with `cargo build` and ran it with
 `./target/debug/hello_cargo`, but we can also use `cargo run` to compile the
-code and then run the resulting executable all in one command:
+code and then run the resultant executable all in one command:
 -->
 <p>先ほどは<code>cargo build</code>でプロジェクトをビルドし、<code>./target/debug/hello_cargo</code>で実行しました。
 <code>cargo run</code>を使うと、コードのコンパイルから、できた実行ファイルの実行までの全体を一つのコマンドで行えます。</p>
@@ -381,13 +385,21 @@ code and then run the resulting executable all in one command:
 Hello, world!
 </code></pre>
 <!--
+Using `cargo run` is more convenient than having to remember to run `cargo
+build` and then use the whole path to the binary, so most developers use `cargo
+run`.
+-->
+<p><code>cargo build</code>を実行してから、バイナリへのパス全体を使って実行する、という手順をいちいち踏むより、
+<code>cargo run</code>を使う方が便利なので、ほとんどの開発者は<code>cargo run</code>を使います。</p>
+<!--
 Notice that this time we didn’t see output indicating that Cargo was compiling
-`hello_cargo`. Cargo figured out that the files hadn’t changed, so it just ran
-the binary. If you had modified your source code, Cargo would have rebuilt the
-project before running it, and you would have seen this output:
+`hello_cargo`. Cargo figured out that the files hadn’t changed, so it didn’t
+rebuild but just ran the binary. If you had modified your source code, Cargo
+would have rebuilt the project before running it, and you would have seen this
+output:
 -->
 <p>今回はCargoが<code>hello_cargo</code>をコンパイルしていることを示す出力がないことに注目してください。
-Cargoはファイルが変更されていないことに気づいたので、単にバイナリを実行したのです。
+Cargoはファイルが変更されていないことに気づいたので、再ビルドせずに単にバイナリを実行したのです。
 もしソースコードを変更していたら、Cargoは実行前にプロジェクトを再ビルドし、以下のような出力が表示されたことでしょう。</p>
 <pre><code class="language-console">$ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
@@ -407,15 +419,16 @@ your code to make sure it compiles but doesn’t produce an executable:
 </code></pre>
 <!--
 Why would you not want an executable? Often, `cargo check` is much faster than
-`cargo build`, because it skips the step of producing an executable. If you’re
+`cargo build` because it skips the step of producing an executable. If you’re
 continually checking your work while writing the code, using `cargo check` will
-speed up the process! As such, many Rustaceans run `cargo check` periodically
-as they write their program to make sure it compiles. Then they run `cargo
-build` when they’re ready to use the executable.
+speed up the process of letting you know if your project is still compiling! As
+such, many Rustaceans run `cargo check` periodically as they write their
+program to make sure it compiles. Then they run `cargo build` when they’re
+ready to use the executable.
 -->
 <p>なぜ実行可能ファイルが欲しくないのでしょうか？
 <code>cargo check</code>は実行ファイルを生成するステップを省くことができるので、多くの場合、<code>cargo build</code>よりもずっと高速です。
-もし、あなたがコードを書きながら継続的にチェックするのなら、<code>cargo check</code>を使えば、そのプロセスを高速化できます！
+もし、あなたがコードを書きながら継続的にチェックするのなら、<code>cargo check</code>を使えば、プロジェクトがまだコンパイルできるか確認するプロセスを高速化できます！
 そのため多くのRustaceanはプログラムを書きながら定期的に<code>cargo check</code>を実行し、コンパイルできるか確かめます。
 そして、実行ファイルを使う準備ができたときに<code>cargo build</code>を走らせるのです。</p>
 <!--
@@ -475,12 +488,13 @@ the executable in *target/release*.
 <!--
 With simple projects, Cargo doesn’t provide a lot of value over just using
 `rustc`, but it will prove its worth as your programs become more intricate.
-With complex projects composed of multiple crates, it’s much easier to let
-Cargo coordinate the build.
+Once programs grow to multiple files or need a dependency, it’s much easier to
+let Cargo coordinate the build.
 -->
 <p>単純なプロジェクトでは、Cargoは単に<code>rustc</code>を使うことに対してあまり多くの価値を生みません。
 しかし、プログラムが複雑になるにつれて、その価値を証明することになるでしょう。
-複数のクレートからなる複雑なプロジェクトでは、Cargoにビルドを調整させるほうがずっと簡単です。</p>
+プログラムが複数のファイルに分かれるほど大きくなったり、依存が必要になってくると、
+Cargoにビルドを調整させるほうがずっと簡単です。</p>
 <!--
 Even though the `hello_cargo` project is simple, it now uses much of the real
 tooling you’ll use in the rest of your Rust career. In fact, to work on any
@@ -494,9 +508,7 @@ $ cd someproject
 $ cargo build
 </code></pre>
 <!--
-For more information about Cargo, check out [its documentation].
-
-[its documentation]: https://doc.rust-lang.org/cargo/
+For more information about Cargo, check out [its documentation][cargo].
 -->
 <p>Cargoの詳細については、<a href="https://doc.rust-lang.org/cargo/">ドキュメント</a>を参照してください。</p>
 <!--
@@ -534,7 +546,9 @@ Rust, see Chapter 3 and then return to Chapter 2.
 もし、一般的なプログラミングの概念がRustでどう実現されるか学ぶことから始めたいのであれば、第3章を読んで、それから第2章に戻ってください。</p>
 <!--
 [installation]: ch01-01-installation.html#installation
+[toml]: https://toml.io
 [appendix-e]: appendix-05-editions.html
+[cargo]: https://doc.rust-lang.org/cargo/
 -->
 
                     </main>
