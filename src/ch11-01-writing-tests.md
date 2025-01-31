@@ -958,7 +958,7 @@ figuring out where our bug is!
 
 この失敗メッセージは、このテストが確かに予想通りパニックしたことを示していますが、
 パニックメッセージは、予想される文字列の`'Guess value must be less than or equal to 100'`を含んでいませんでした。
-実際に得られたパニックメッセージは今回の場合、`Guess value must be greater than or equal to 1, got 200`でした。
+実際に得られたパニックメッセージは今回の場合、`Guess value must be greater than or equal to 1, got 200.`でした。
 そうしてバグの所在地を割り出し始めることができるわけです！
 
 <!--
