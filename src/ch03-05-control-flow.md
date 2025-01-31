@@ -212,7 +212,7 @@ condition, and once it finds one, it doesn’t even check the rest.
 -->
 
 このプログラムを実行すると、`if`式が順番に吟味され、最初に条件が`true`に評価された本体が実行されます。
-6は2で割り切れるものの、`number is devisible by 2`や、
+6は2で割り切れるものの、`number is divisible by 2`や、
 `else`ブロックの`number is not divisible by 4, 3, or 2`という出力はされないことに注目してください。
 それは、Rustが最初の`true`な条件のブロックのみを実行し、
 条件に合ったものが見つかったら、残りはチェックすらしないからです。
