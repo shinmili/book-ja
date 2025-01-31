@@ -957,7 +957,7 @@ and do one more project!
 [decl]: #declarative-macros-with-macro_rules-for-general-metaprogramming
 -->
 
-[ref]: https://docs.rust-lang.org/reference/macros-by-example.html
+[ref]: https://doc.rust-lang.org/reference/macros-by-example.html
 [tlborm]: https://veykril.github.io/tlborm/
 [`syn`]: https://crates.io/crates/syn
 [`quote`]: https://crates.io/crates/quote
