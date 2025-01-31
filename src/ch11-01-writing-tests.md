@@ -557,6 +557,8 @@ parameter, then we test this function using the `assert_eq!` macro.
 Let’s check that it passes!
 -->
 
+これが通ることを確認しましょう！
+
 ```console
 {{#include ../listings/ch11-writing-automated-tests/listing-11-07/output.txt}}
 ```
